@@ -1,0 +1,40 @@
+@import '../../index.scss';
+
+.main_material-container{
+  padding: 0.5rem 0 0 0;
+  color: $azul;
+}
+
+.body_material-container{
+  padding: 0.6rem 1rem 0.6rem 1rem;
+  position: relative;
+  border: 1px solid $azul;
+  border-radius: 10px;
+}
+
+@mixin texto_material-container {
+  padding: 0px 0.5rem;
+  position: absolute;
+  color: $azul;
+  background-color: $blanco;
+  overflow-wrap: break-word;
+  cursor: default;
+  user-select: none;
+}
+
+.texto-izquierda_material-container{
+  @include texto_material-container;
+  top: -15px;
+  left: 20px;
+}
+
+.texto-derecha_material-container{
+  @include texto_material-container;
+  top: -15px;
+  right: 20px;
+}
+
+.scroll-children_material-container{
+  max-height: 25rem;
+  overflow-y: auto;
+}

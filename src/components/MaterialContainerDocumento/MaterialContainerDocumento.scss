@@ -1,0 +1,62 @@
+@import '../../index.scss';
+
+.main_material-container-documento{
+  padding: 0.5rem 0 0 0;
+}
+
+.main_material-primary-container-documento{
+  color: $primary;
+}
+
+.main_material-danger-container-documento{
+  color: $rojo;
+}
+
+.body_material-container-documento{
+  padding: 0.6rem 1rem 0.6rem 1rem;
+  position: relative;
+  border: 1px solid;
+  border-radius: 10px;
+}
+
+@mixin texto_material-container-documento {
+  padding: 0px 0.5rem;
+  position: absolute;
+  background-color: $blanco;
+  overflow-wrap: break-word;
+  cursor: default;
+  user-select: none;
+}
+
+.texto-izquierda_material-container-documento{
+  @include texto_material-container-documento;
+  top: -15px;
+  left: 20px;
+}
+
+.texto-derecha_material-container-documento{
+  @include texto_material-container-documento;
+  top: -15px;
+  right: 20px;
+  display: flex;
+  align-items: center;
+}
+
+@mixin dot_material-container-documento{
+  margin-left: 0.4rem;
+  width: 0.5rem;
+  height: 0.5rem;
+  display: inline-block;
+  border-radius: 50%;
+}
+
+.dot-calipso_material-container-documento{
+  @include dot_material-container-documento;
+  background-color: $calipso;
+}
+
+.dot-rojo_material-container-documento{
+  @include dot_material-container-documento;
+  background-color: $rojo;
+}
+

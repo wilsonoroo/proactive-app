@@ -1,0 +1,30 @@
+@import "../../index.scss";
+
+.boton-cerrar-modal-mensaje {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  color: $blanco;
+  width: 25px;
+  height: 25px;
+  border: 2px solid $blanco;
+  border-radius: 100%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container-box-modal-mensaje{
+  color: $blanco;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  background-color: $gris-dark;
+  box-shadow: 0 0 10px rgba(1, 1, 1, 0.2);
+  padding: 25px;
+  border-radius: 10px;
+  outline: unset;
+}

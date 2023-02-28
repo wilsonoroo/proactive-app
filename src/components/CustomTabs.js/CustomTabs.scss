@@ -1,0 +1,29 @@
+@import '../../index.scss';
+
+.main_custom-tabs{
+  background-color: $gris-light;
+  font-weight: 500;
+  color: $gris-dark;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.tab_custom-tabs {
+  padding: 0.5rem 0.7rem;
+  margin: 0.4rem;
+}
+
+.tab-unselected_custom-tabs{
+  background-color: $blanco;
+  color: $azul-light;
+  border-radius: 5px;
+  box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}
+
+.tab-selected_custom-tabs{
+  color: $gris-dark;
+  cursor: default;
+}

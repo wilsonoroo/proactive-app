@@ -1,0 +1,27 @@
+@import '../../config/variables.scss';
+
+.container-archivo_documento{
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+}
+
+.icono-archivo_documento{
+  color: #0080ff;
+  margin-right: 0.5rem;
+}
+
+.icono-eliminar_documento{
+  color: $rojo;
+  cursor: pointer;
+}
+
+.icono-check_documento{
+  margin-right: 0.5rem;
+  color: $calipso;
+}
+
+.desactivar-archivo_archivo_documento{
+  opacity: 0.2;
+  pointer-events: none;
+}

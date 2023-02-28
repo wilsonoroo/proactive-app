@@ -1,0 +1,22 @@
+@import '../../config/variables.scss';
+
+.main_seleccionar-ticket{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  font-size: 1rem;
+
+  img{
+    max-width: 30px;
+    margin: 0.3rem 0.5rem 0.3rem 0;
+  }
+}
+
+.active_seleccionar-ticket{
+  color: $calipso;
+}
+
+.no-active_seleccionar-ticket{
+  color: $dark;
+}

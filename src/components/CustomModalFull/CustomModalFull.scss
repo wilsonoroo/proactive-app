@@ -1,0 +1,30 @@
+@import "../../index.scss";
+
+.boton-cerrar-full {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  // background-color: $rojo;
+  color: $rojo;
+  width: 25px;
+  height: 25px;
+  border: 2px solid $rojo;
+  border-radius: 100%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container-box-full{
+  position: relative;
+  top: 50%;
+  left: 50%;
+  
+  width: 90%;
+  max-height: 90vh;
+  background-color: $blanco;
+  box-shadow: 24;
+  padding: 25px;
+  border-radius: 10px;
+}

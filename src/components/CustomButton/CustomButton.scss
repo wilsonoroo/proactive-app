@@ -1,0 +1,50 @@
+@import '../../config/variables.scss';
+
+@mixin custom-button {
+  background-color: $primary;
+  /* Green */
+  border: none;
+  color: $blanco;
+  padding: 0.5rem 1.5rem;
+  text-align: center;
+  font-weight: 500;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 5px;
+  user-select: none;
+
+  &:focus {
+    outline: none;
+    border: none;
+  }
+}
+
+.custom-button-primary {
+  @include custom-button();
+  background-color: $primary;
+
+  &:hover {
+    background-color: $primary-hover;
+  }
+}
+
+.custom-button-calipso {
+  @include custom-button();
+  background-color: $calipso;
+  color: $azul-dark;
+
+  &:hover {
+    background-color: $calipso-hover;
+  }
+}
+
+.custom-button-dark {
+  @include custom-button();
+  background-color: $dark;
+
+  &:hover {
+    background-color: $dark-hover;
+  }
+}

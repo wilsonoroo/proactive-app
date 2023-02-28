@@ -1,0 +1,38 @@
+@import '../../config/variables.scss';
+
+.container_usuario-card{
+  width: 180px;
+  padding: 1.2rem 1.2rem 1rem 1.2rem;
+}
+
+.container-relative_usuario-card{
+  position: relative;
+  z-index: -9999;
+}
+
+.container-absolute-progreso_usuario-card{
+  position: absolute;
+  z-index: 9999;
+  top: -30px;
+  right: -15px;
+}
+
+.container-absolute-carita_usuario-card{
+  position: absolute;
+  z-index: 9999;
+  bottom: -10px;
+  right: 20px;
+}
+
+.primary-text_usuario-card{
+  text-align: center;
+  color: $dark;
+  font-weight: 500;
+  overflow-wrap: break-word;
+}
+
+.secondary-text_usuario-card{
+  text-align: center;
+  color: $primary;
+  overflow-wrap: break-word;
+}

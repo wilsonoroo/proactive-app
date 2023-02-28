@@ -1,0 +1,14 @@
+@import '../../config/variables.scss';
+
+.container-status-item-red{
+  background-color: $rojo;
+  border-radius: 5px;
+}
+.container-status-item-green{
+  background-color: $verde;
+  border-radius: 5px;
+}
+.container-status-item-yellow{
+  background-color: $amarillo;
+  border-radius: 5px;
+}

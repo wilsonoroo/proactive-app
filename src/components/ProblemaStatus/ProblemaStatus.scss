@@ -1,0 +1,20 @@
+@import '../../config/variables.scss';
+
+.main_problema-status{
+  width: 100%;
+  color: $gris-dark;
+  font-weight: bold;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  margin-top: 0.5rem;
+
+  img{
+    margin-right: 0.5rem;
+    max-width: 30px;
+  }
+}
+
+.opacidad_problema-status{
+  opacity: 0.2;
+}
