@@ -1,4 +1,6 @@
+import { signInWithEmailAndPassword } from "firebase/auth";
 import { basePath } from '../config/config';
+import { auth } from "./config";
 import { getAccessToken } from './token';
 
 export async function ingresarUsuarioApi(email, password) {
@@ -16,6 +18,25 @@ export async function ingresarUsuarioApi(email, password) {
 
   } catch (err) {
     console.log(err);
+  }
+
+}
+
+export async function loginUsuarioVaku(email, password) {
+  try {
+    console.log(auth, email, password)
+    let result = await signInWithEmailAndPassword(auth, email, password);
+    console.log(result)
+    return {
+      status: 200,
+      user: result.user,
+      token: result.user.accessToken
+
+
+    }
+
+  } catch (error) {
+    console.log(error)
   }
 
 

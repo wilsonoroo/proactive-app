@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
 import * as Icons from 'react-feather';
 import { Navigate, useParams } from "react-router-dom";
-import { obtenerRequisitosPorFAena } from "../../../api/requisitos/requisitos";
-import { actualizarSoicitudReclutamiento, obtenerSolicitudApi } from "../../../api/solicitudes/solicitud";
 import CustomButton from "../../../components/CustomButton/CustomButton";
 import CustomDivider from "../../../components/CustomDivider";
 import CustomTabs from "../../../components/CustomTabs.js/CustomTabs";
@@ -13,6 +11,8 @@ import ListaMensajeria from "../../../components/Reclutamientos/Reclutamiento/Li
 import ListaValidar from "../../../components/Reclutamientos/Reclutamiento/ListaValidar";
 import useFetch from "../../../hooks/useFetch";
 import MainContainer from "../../../layouts/MainContainer";
+import { obtenerRequisitosPorFAena } from "../../../services/requisitos/requisitos";
+import { actualizarSoicitudReclutamiento, obtenerSolicitudApi } from "../../../services/solicitudes/solicitud";
 import { calcularEstado, calcularTotaVerificados, procesarEstadoDocs } from "../../../utils/functions";
 
 export default function ReclutamientoPage() {

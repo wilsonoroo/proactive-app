@@ -1,6 +1,5 @@
 import { useState } from "react";
 import * as Icons from 'react-feather';
-import { eliminarFaena, obtenerFaenasApi } from "../../api/template_name/faenasApi";
 import CustomButton from "../../components/CustomButton/CustomButton";
 import CustomDivider from "../../components/CustomDivider";
 import CustomModal from "../../components/CustomModal/CustomModal";
@@ -9,6 +8,7 @@ import FormularioCrearFaena from "../../components/Faenas/FormularioCrearFaena";
 import Loading from "../../components/Loading";
 import useFetch from "../../hooks/useFetch";
 import MainContainer from "../../layouts/MainContainer";
+import { eliminarFaena, obtenerFaenasApi } from "../../services/template_name/faenasApi";
 
 export default function TemplateName() {
     // titulo para el container y el html

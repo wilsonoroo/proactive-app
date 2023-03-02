@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import * as Icons from 'react-feather';
-import { donwloadFileCompilado } from "../../../../api/requisitos/requisitos";
 import CustomButton from "../../../../components/CustomButton/CustomButton";
 import CustomTabs from "../../../../components/CustomTabs.js/CustomTabs";
 import Documento from "../../../../components/Documento/Documento";
 import MaterialContainer from "../../../../components/MaterialContainer/MaterialContainer";
+import { donwloadFileCompilado } from "../../../../services/requisitos/requisitos";
 
 
 export default function DocumentosUsuario({ reload, usuario, idUser, documentos, onUploadFile, onClick, onDownloadFile }) {

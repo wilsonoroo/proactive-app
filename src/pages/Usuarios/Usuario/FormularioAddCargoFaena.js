@@ -2,12 +2,12 @@
 import { useFormik } from 'formik';
 import { useEffect, useState } from 'react';
 import * as Icons from 'react-feather';
-import { obtenerCargosPorFaenas } from '../../../api/cargos/cargos';
-import { obtenerFaenasApi } from '../../../api/faena/faenasApi';
-import { actualizarPersonal } from '../../../api/personal/personal';
 import CustomButton from '../../../components/CustomButton/CustomButton';
 import Seleccionador from '../../../components/Seleccionador/Seleccionador';
 import useFetch from '../../../hooks/useFetch';
+import { obtenerCargosPorFaenas } from '../../../services/cargos/cargos';
+import { obtenerFaenasApi } from '../../../services/faena/faenasApi';
+import { actualizarPersonal } from '../../../services/personal/personal';
 
 
 export default function FormularioAddCargoFaena({ setOpenModal, setOpenModalMensaje, refreshData, data = null }) {

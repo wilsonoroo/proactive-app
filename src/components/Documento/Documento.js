@@ -2,7 +2,7 @@ import { Link } from "@mui/material";
 import { Box } from "@mui/system";
 import { useState } from "react";
 import * as Icons from 'react-feather';
-import { deleteUploadFileApi } from "../../api/personal/personal";
+import { deleteUploadFileApi } from "../../services/personal/personal";
 import * as util from '../../utils/utils';
 import MaterialContainerDocumento from "../MaterialContainerDocumento/MaterialContainerDocumento";
 import UploadFile from "../UploadFile/UploadFile";

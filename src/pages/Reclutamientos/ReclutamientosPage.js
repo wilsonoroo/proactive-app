@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import { obtenerRequisitosPorFAena } from "../../api/requisitos/requisitos";
-import { obtenerSolicitudesApi } from "../../api/solicitudes/solicitud";
 import CustomDivider from "../../components/CustomDivider";
 import CustomTabs from "../../components/CustomTabs.js/CustomTabs";
 import Loading from "../../components/Loading";
@@ -9,6 +7,8 @@ import AgregarReclutamiento from "../../components/Reclutamientos/AgregarRecluta
 import TablaReclutamientos from "../../components/Reclutamientos/TablaReclutamientos";
 import useFetch from "../../hooks/useFetch";
 import MainContainer from "../../layouts/MainContainer";
+import { obtenerRequisitosPorFAena } from "../../services/requisitos/requisitos";
+import { obtenerSolicitudesApi } from "../../services/solicitudes/solicitud";
 import { calcularEstado, calcularTotaVerificados, procesarEstadoDocs } from "../../utils/functions";
 
 export default function ReclutamientosPage() {

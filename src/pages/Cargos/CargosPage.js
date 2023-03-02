@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import * as Icons from 'react-feather';
-import { elimianarCargoApi, obtenerCargosApi } from "../../api/cargos/cargos";
 import FormularioCrearCargo from "../../components/Cargos/FormularioCrearCargo";
 import TablaCargo from "../../components/Cargos/TablaCargo";
 import CustomButton from "../../components/CustomButton/CustomButton";
@@ -10,6 +9,7 @@ import CustomModalMensaje from "../../components/CustomModalMensaje/CustomModalM
 import Loading from "../../components/Loading";
 import useFetch from "../../hooks/useFetch";
 import MainContainer from "../../layouts/MainContainer";
+import { elimianarCargoApi, obtenerCargosApi } from "../../services/cargos/cargos";
 
 
 export default function CargosPage() {

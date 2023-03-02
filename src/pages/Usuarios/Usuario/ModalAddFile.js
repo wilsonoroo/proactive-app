@@ -1,9 +1,9 @@
 import { Grid, LinearProgress } from "@mui/material";
 import { useRef, useState } from "react";
 import * as Icons from 'react-feather';
-import { upDateUploadFileApi } from "../../../api/personal/personal";
 import CustomButton from "../../../components/CustomButton/CustomButton";
 import CustomDatePicker from "../../../components/CustomInputs/CustomDatePicker";
+import { upDateUploadFileApi } from "../../../services/personal/personal";
 
 import CustomModal from "../../../components/CustomModal/CustomModal";
 

@@ -1,9 +1,9 @@
 import { Divider, Grid, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { obtenerPersonalApi } from "../../api/personal/personal";
 import useFetch from "../../hooks/useFetch";
 import MainContainer from "../../layouts/MainContainer";
+import { obtenerPersonalApi } from "../../services/personal/personal";
 import AgregarDocsUsuarioFromFile from "./component/AgregarDocsUsuarioFromFile";
 import AgregarUsuario from "./component/AgregarUsuario";
 import AgregarUsuarioFromFile from "./component/AgregarUsuarioFromFile";

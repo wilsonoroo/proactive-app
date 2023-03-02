@@ -1,7 +1,11 @@
 import { createContext, useEffect, useState } from "react";
-import { ingresarUsuarioApi, reIngresarUsuarioApi } from "../api/authAPI";
-import { clearAccessToken, getAccessToken, setAccessToken } from "../api/token";
 import Loading from "../components/Loading";
+import { loginUsuarioVaku, reIngresarUsuarioApi } from "../services/authAPI";
+import {
+  clearAccessToken,
+  getAccessToken,
+  setAccessToken,
+} from "../services/token";
 interface User {
   id: string;
   email: string;
@@ -22,17 +26,16 @@ interface props {
 }
 
 export default function AuthProvider({ children }: props) {
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<any | null>(null);
 
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   async function login(email: string, password: string): Promise<boolean> {
-    const response = await ingresarUsuarioApi(email, password);
+    const response = await loginUsuarioVaku(email, password);
     if (response?.status === 200) {
-      const { user, token } = await response.json();
-      console.log(user);
-      setAccessToken(token);
-      setUser(user);
+      console.log(response);
+      setAccessToken(response.token as string);
+      setUser(response.user);
       return true;
     } else {
       return false;

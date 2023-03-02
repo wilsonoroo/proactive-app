@@ -3,11 +3,11 @@ import { useFormik } from 'formik';
 import { useState } from 'react';
 import * as Icons from 'react-feather';
 import * as yup from 'yup';
-import { crearTrabajadorApi } from '../../../api/personal/personal';
 import CustomButton from '../../../components/CustomButton/CustomButton';
 import CustomDatePicker from '../../../components/CustomInputs/CustomDatePicker';
 import CustomSelect from '../../../components/CustomInputs/CustomSelect';
 import CustomTextField from '../../../components/CustomInputs/CustomTextField';
+import { crearTrabajadorApi } from '../../../services/personal/personal';
 
 
 

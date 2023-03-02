@@ -2,7 +2,7 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import CargosPage from "./pages/Cargos/CargosPage";
 import Error404Page from "./pages/Error404Page/Error404Page";
 import FaenasPage from "./pages/Faenas/FaenasPage";
-import IngresarPage from "./pages/Ingresar/IngresarPage";
+import Login from "./pages/Ingresar/IngresarPage";
 import LicenciaConducirPage from "./pages/LicenciaConducir/LicenciaConducirPage";
 import PublicAddUser from "./pages/publicAddUser/PublicAddUser";
 import ReclutamientoPage from "./pages/Reclutamientos/Reclutamiento/ReclutamientoPage";
@@ -20,8 +20,8 @@ export default function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Navigate to="/ingresar" />} />
-        <Route path="ingresar" element={<PublicRoute componente={IngresarPage} />} />
+        <Route path="/" element={<Navigate to="/login" />} />
+        <Route path="login" element={<PublicRoute componente={Login} />} />
         <Route path="primerIngreso" element={<PublicRoute componente={PublicAddUser} />} />
         <Route path="requisitos" element={<PrivateRoute permisos={["vendedor"]} componente={RequisitosPage} />} />
         <Route path="licencia-conducir" element={<PrivateRoute permisos={["vendedor"]} componente={LicenciaConducirPage} />} />

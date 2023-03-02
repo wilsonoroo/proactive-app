@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import * as Icons from 'react-feather';
-import { obtenerRequisitosApi } from "../../api/requisitos/requisitos";
 import CustomButton from "../../components/CustomButton/CustomButton";
 import CustomDivider from "../../components/CustomDivider";
 import CustomModal from "../../components/CustomModal/CustomModal";
@@ -10,6 +9,7 @@ import FormularioCrearRequisito from "../../components/Requisitos/FormularioCrea
 import TablaRequisitos from "../../components/Requisitos/TablaRequisitos";
 import useFetch from "../../hooks/useFetch";
 import MainContainer from "../../layouts/MainContainer";
+import { obtenerRequisitosApi } from "../../services/requisitos/requisitos";
 
 export default function UsuariosPage() {
   // titulo para el container y el html

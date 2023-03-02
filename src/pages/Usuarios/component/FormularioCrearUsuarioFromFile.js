@@ -3,9 +3,9 @@ import { useFormik } from 'formik';
 import { useEffect, useRef, useState } from 'react';
 import * as Icons from 'react-feather';
 import Terminal from 'terminal-in-react';
-import { crearTrabajadorApi } from '../../../api/personal/personal';
 import CustomButton from '../../../components/CustomButton/CustomButton';
 import UploadFileCargaUsuario from '../../../components/UploadFileCargaUsuario/UploadFileCargaUsuario';
+import { crearTrabajadorApi } from '../../../services/personal/personal';
 import './console.scss';
 
 export default function FormularioCrearUsuarioFromFile({ setOpenModal, setOpenModalMensaje, refreshData }) {

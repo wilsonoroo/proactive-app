@@ -1,6 +1,5 @@
 import { useState } from "react";
 import * as Icons from 'react-feather';
-import { eliminarLicenciaConduccion, obtenerLicenciaConduccionApi } from "../../api/licenciaConduccion/licenciaConduccionApi";
 import CustomButton from "../../components/CustomButton/CustomButton";
 import CustomDivider from "../../components/CustomDivider";
 import CustomModal from "../../components/CustomModal/CustomModal";
@@ -10,6 +9,7 @@ import TablaFaenas from "../../components/Faenas/TablaFaenas";
 import Loading from "../../components/Loading";
 import useFetch from "../../hooks/useFetch";
 import MainContainer from "../../layouts/MainContainer";
+import { eliminarLicenciaConduccion, obtenerLicenciaConduccionApi } from "../../services/licenciaConduccion/licenciaConduccionApi";
 
 export default function UsuariosPage() {
   // titulo para el container y el html

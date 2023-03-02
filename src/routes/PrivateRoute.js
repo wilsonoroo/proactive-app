@@ -13,6 +13,6 @@ export default function PrivateRoute({ componente: Componente, permisos = [] }) 
       </CustomDrawer>
     );
   } else {
-    return <Navigate to="/ingresar" />
+    return <Navigate to="/login" />
   }
 }

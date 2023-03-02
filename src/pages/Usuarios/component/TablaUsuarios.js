@@ -1,10 +1,10 @@
 import { Divider, Grid } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { deleteTrabajador } from "../../../api/usuariosAPI";
 import CustomInput from "../../../components/CustomInputs/CustomInput";
 import CustomMaterialTable from "../../../components/CustomMaterialTable/CustomMaterialTable";
 import Loading from "../../../components/Loading";
+import { deleteTrabajador } from "../../../services/usuariosAPI";
 
 
 
