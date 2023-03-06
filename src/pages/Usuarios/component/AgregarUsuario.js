@@ -4,14 +4,19 @@ import CustomButton from "../../../components/CustomButton/CustomButton";
 import CustomModal from "../../../components/CustomModal/CustomModal";
 import CustomModalMensaje from "../../../components/CustomModalMensaje/CustomModalMensaje";
 import FormularioCrearUsuario from "./FormularioCrearUsuario";
+import { FormularioCrearUsuarioV } from "./FormularioCrearUsuarioV";
 
-export default function AgregarUsuario({ refreshData }) {
+export default function AgregarUsuario(props) {
   const [openModal, setOpenModal] = useState(false);
   const [openModalMensaje, setOpenModalMensaje] = useState({
     titulo: "",
     descripcion: "",
     isActive: false,
   });
+
+  const utils = props?.utils;
+  // console.log(utils.cuadrillas)
+
 
   return (
     <div>
@@ -21,7 +26,7 @@ export default function AgregarUsuario({ refreshData }) {
         openModal={openModal}
         setOpenModal={setOpenModal}
       >
-        <FormularioCrearUsuario setOpenModal={setOpenModal} setOpenModalMensaje={setOpenModalMensaje} refreshData={refreshData} />
+        <FormularioCrearUsuarioV setOpenModal={setOpenModal} setOpenModalMensaje={setOpenModalMensaje} utils={utils} />
       </CustomModal>
       <CustomModalMensaje
         titulo={"Creación de Usuario"}

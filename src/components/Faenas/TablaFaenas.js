@@ -1,25 +1,65 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import CustomDivider from "../CustomDivider";
 import CustomInput from "../CustomInputs/CustomInput";
 import CustomMaterialTable from "../CustomMaterialTable/CustomMaterialTable";
 
-export default function TablaFaenas({ usuarios, refreshData, onDelete }) {
-  console.log('TablaFaenas');
-
+export default function TablaFaenas({ faenas, refreshData, onDelete, loadingData }) {
+  // console.log('TablaFaenas');
   const navigate = useNavigate();
 
-  const [inputSearchValue, setInputSearchValue] = useState("");
+  const [openModalMensaje, setOpenModalMensaje] = useState({
+    titulo: "",
+    descripcion: "",
+    isActive: false,
+  });  
+  const [inputSearchValue, setInputSearchValue] = useState(null);
+  const [dataFaenas, setDataFaenas] = useState({ data: [], loading: false });
+
+  useEffect(() => {
+    setDataFaenas({ data: faenas, loading: loadingData })
+  }, [faenas])
+
+  useEffect(() => {
+    // console.log(inputSearchValue)
+    const timer = setTimeout(() => filteredVehiculos(), 1000);
+    return () => clearTimeout(timer);
+  }, [inputSearchValue])
+
+  const asyncFilter = async (arr, predicate) =>
+    arr.reduce(async (memo, e) =>
+      [...await memo, ...await predicate(e) ? [e] : []]
+      , []);
+
+
+  const filteredVehiculos = async () => {
+    if (inputSearchValue !== null) {
+      setDataFaenas({ ...dataFaenas, loading: true })
+      let dataResult = await asyncFilter(faenas, dataFilters);
+      // console.log("=>>filterV", dataResult)
+      setDataFaenas({ data: dataResult, loading: false })
+    }
+  }
+
 
   const dataFilters = (e) => {
-    if (inputSearchValue.length > 1) {
-      if (e.nombre.toLowerCase().includes(inputSearchValue.toLowerCase()) || e.abreviatura.toLowerCase().includes(inputSearchValue.toLowerCase())) {
-        return true;
+    if (inputSearchValue.length !== 0) {
+      if (e.nombre || e.region || e.abreviatura) {
+        if (e.nombre.toLowerCase().includes(inputSearchValue.toLowerCase()) ||
+          e.region.toLowerCase().includes(inputSearchValue.toLowerCase()) ||
+          e.abreviatura.toLowerCase().includes(inputSearchValue.toLowerCase())) {
+          return true;
+        }
       }
       return false;
     }
-    return true;
+    return true
   }
+
+
+
+
+
 
   const handleEliminar = (idUsuario) => {
     onDelete(idUsuario)
@@ -30,7 +70,19 @@ export default function TablaFaenas({ usuarios, refreshData, onDelete }) {
     {
       id: 'nombre',
       disablePadding: false,
-      label: 'Nombre Faena/Planta Industrial',
+      label: 'Nombre Faena',
+      type: "string"
+    },
+    {
+      id: 'region',
+      disablePadding: false,
+      label: 'Región',
+      type: "string"
+    },
+    {
+      id: 'comuna',
+      disablePadding: false,
+      label: 'Comuna',
       type: "string"
     },
     {
@@ -40,17 +92,23 @@ export default function TablaFaenas({ usuarios, refreshData, onDelete }) {
       type: "string"
     },
     {
-      id: 'ubicacion',
+      id: 'tipoFaena',
       disablePadding: false,
-      label: 'Ubicacion',
+      label: 'Tipo Faena',
       type: "string"
     },
     {
-      id: 'responsable',
+      id: 'isVigente',
       disablePadding: false,
-      label: 'Responsable de Acreditación',
-      type: "responsable_view"
+      label: 'Estado',
+      type: "bool"
     },
+    // {
+    //   id: 'isEliminado',
+    //   disablePadding: false,
+    //   label: 'E',
+    //   type: "bool"
+    // },
     {
       id: '_id',
       disablePadding: false,
@@ -77,37 +135,10 @@ export default function TablaFaenas({ usuarios, refreshData, onDelete }) {
         <CustomMaterialTable
           handleEliminar={handleEliminar}
           headerData={headerFaenas}
-          data={usuarios.filter((e) => dataFilters(e))}
+          data={dataFaenas.data}
         />
       </div>
     </div>
   );
 }
 
-const headerFaenas = [
-  {
-    id: 'nombre',
-    disablePadding: false,
-    label: 'Nombre Faena/Planta Industrial',
-    type: "string"
-  },
-  {
-    id: 'abreviatura',
-    disablePadding: false,
-    label: 'Abreviatura',
-    type: "string"
-  },
-  {
-    id: 'ubicacion',
-    disablePadding: false,
-    label: 'Acciones',
-    type: "acciones"
-  },
-  {
-    id: 'responsable',
-    disablePadding: false,
-    label: 'Responsable de Acreditación',
-    type: "string"
-  },
-
-];

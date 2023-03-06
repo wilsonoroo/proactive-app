@@ -1,7 +1,8 @@
 import { Divider, Grid } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { deleteTrabajador } from "../../../api/usuariosAPI";
+// import { deleteTrabajador } from "../../../api/usuariosAPI";
+import { deleteTrabajador } from "../../../services/database/usuariosServices"
 import CustomInput from "../../../components/CustomInputs/CustomInput";
 import CustomMaterialTable from "../../../components/CustomMaterialTable/CustomMaterialTable";
 import Loading from "../../../components/Loading";
@@ -11,28 +12,27 @@ import Loading from "../../../components/Loading";
 
 export default function TablaUsuarios({ usuarios, refreshData, loadingData }) {
   const navigate = useNavigate();
-
+  // const empresa = "shingeki_no_sushi";
   const [inputSearchValue, setInputSearchValue] = useState(null);
   const [dataUser, setDataUser] = useState({ data: [], loading: false });
-  const [debouncedTerm, setDebouncedTerm] = useState(inputSearchValue);
+  // const [debouncedTerm, setDebouncedTerm] = useState(inputSearchValue);
   useEffect(() => {
-    console.log("=>>init", dataUser, usuarios.length)
     setDataUser({ data: usuarios, loading: loadingData })
-  }, [])
-
-  useEffect(() => {
-    console.log("=>>usuarios", { ...dataUser, data: usuarios }, usuarios.length)
-    setDataUser({ ...dataUser, data: usuarios })
   }, [usuarios])
 
-  useEffect(() => {
-    console.log("=>>loading", { ...dataUser, loading: usuarios }, usuarios.length)
-    setDataUser({ ...dataUser, loading: loadingData })
-  }, [loadingData])
-  console.log(dataUser, usuarios.length)
+  // useEffect(() => {
+  //   console.log("=>>usuarios", { ...dataUser, data: usuarios }, usuarios.length)
+  //   setDataUser({ ...dataUser, data: usuarios })
+  // }, [usuarios])
+
+  // useEffect(() => {
+  //   console.log("=>>loading", { ...dataUser, loading: usuarios }, usuarios.length)
+  //   setDataUser({ ...dataUser, loading: loadingData })
+  // }, [loadingData])
+  // console.log(dataUser, usuarios.length)
 
   useEffect(() => {
-    console.log(inputSearchValue)
+    // console.log(inputSearchValue)
     const timer = setTimeout(() => filterUsuarios(), 1000);
     return () => clearTimeout(timer);
   }, [inputSearchValue])
@@ -40,32 +40,34 @@ export default function TablaUsuarios({ usuarios, refreshData, loadingData }) {
 
   const dataFilters = (e) => {
     if (inputSearchValue.length !== 0) {
-      if (e.nombre || e.correo || e.rut) {
+
+      if (e.displayName || e.email || e.rut) {
         if (e.rut.toLowerCase().includes(inputSearchValue.toLowerCase()) ||
-          e.nombres.toLowerCase().includes(inputSearchValue.toLowerCase()) ||
-          e.correo.toLowerCase().includes(inputSearchValue.toLowerCase())) {
+          e.displayName.toLowerCase().includes(inputSearchValue.toLowerCase()) ||
+          e.email.toLowerCase().includes(inputSearchValue.toLowerCase())) {
           return true;
         }
       }
       return false;
     }
     return true
-
-
   }
 
-  const handleEliminar = (idUsuario) => {
-    console.log("=>>handleEliminar")
-    setDataUser({ ...dataUser, loading: true })
-    deleteTrabajador(idUsuario).then((response) => {
-      console.log(response.status);
-      if (response?.status === 200) {
-        refreshData();
-      }
+
+  const handleEliminar = (empresa = "shingeki_no_sushi", uid="DlnC8ZGgJ4XCCCmPbUqOOPWjtWJ2") => {
+    console.log(`Eliminar usuario de la empresa ${empresa} con uid ${uid}`);
+    // console.log("=>>handleEliminar");
+    setDataUser({ ...dataUser, loading: true });
+    deleteTrabajador(empresa, uid).then(() => {
+      console.log("Usuario eliminado correctamente");
+      refreshData();
     }).catch(error => {
-      setDataUser({ ...dataUser, loading: false })
+      console.log(error);
+      setDataUser({ ...dataUser, loading: false });
     });
-  }
+  };
+
+  
   const asyncFilter = async (arr, predicate) =>
     arr.reduce(async (memo, e) =>
       [...await memo, ...await predicate(e) ? [e] : []]
@@ -73,43 +75,27 @@ export default function TablaUsuarios({ usuarios, refreshData, loadingData }) {
 
 
   const filterUsuarios = async () => {
-
-    console.log("=>>filterUsuarios", inputSearchValue)
+    // console.log("=>>filterUsuarios", inputSearchValue)
     if (inputSearchValue !== null) {
       setDataUser({ ...dataUser, loading: true })
       let dataResult = await asyncFilter(usuarios, dataFilters);
       console.log("=>>filterUsuarios", dataResult)
       setDataUser({ data: dataResult, loading: false })
     }
-
-
   }
 
   const headerUsuarios = [
+    // {
+    //   id: 'avatar',
+    //   disablePadding: false,
+    //   label: 'Foto',
+    //   type: "avatar"
+    // },
     {
-      id: '_id',
+      id: 'displayName',
       disablePadding: false,
-      label: 'Acciones',
-      type: "acciones",
-      acciones: [
-        {
-          type: "view",
-          function: (id) => { console.log(id); navigate(`./${id._id}`) }
-        },
-        {
-          type: "delete",
-          function: (id) => {
-
-            console.log("delete", id)
-          }
-        },
-      ]
-    },
-    {
-      id: 'avatar',
-      disablePadding: false,
-      label: 'Foto',
-      type: "avatar"
+      label: 'Nombre',
+      type: "string"
     },
     {
       id: 'rut',
@@ -118,54 +104,45 @@ export default function TablaUsuarios({ usuarios, refreshData, loadingData }) {
       type: "string"
     },
     {
-      id: 'nombres',
-      disablePadding: false,
-      label: 'Nombre',
-      type: "string"
-    },
-    {
-      id: 'apellidoPaterno',
-      disablePadding: false,
-      label: 'Apellido Paterno',
-      type: "string"
-    },
-    {
-      id: 'apellidoMaterno',
-      disablePadding: false,
-      label: 'Apellido Materno',
-      type: "string"
-    },
-    {
-      id: 'correo',
+      id: 'email',
       disablePadding: false,
       label: 'e-mail',
       type: "email"
     },
     {
-      id: 'telefono',
+      id: 'cargo',
       disablePadding: false,
-      label: 'Teléfono',
+      label: 'Cargo',
       type: "string"
     },
     {
-      id: 'ciudadResidencia',
+      id: 'turno',
       disablePadding: false,
-      label: 'Residencia',
+      label: 'Turno',
       type: "string"
     },
     {
-      id: 'profesionEspecialidad',
+      id: 'rol.displayName',
       disablePadding: false,
-      label: 'Profesión/Ocupación',
+      label: 'Rol',
       type: "string"
     },
     {
-      id: 'isActivo',
+      id: '_id',
       disablePadding: false,
-      label: 'Profesional Activo',
-      type: "bool"
-    },
-
+      label: 'Acciones',
+      type: "acciones",
+      acciones: [
+        {
+          type: "delete",
+          function: (id) => console.log("delete", id)
+        },
+        {
+          type: "view",
+          function: (id) => navigate(`./${id._id}`)
+        }
+      ]
+    }
   ];
 
   return (
@@ -183,7 +160,7 @@ export default function TablaUsuarios({ usuarios, refreshData, loadingData }) {
           <Divider variant="fullWidth" component={'div'} />
           {/* <CustomDivider /> */}
         </Grid>
-        <Grid item md={12}>
+        <Grid item md={12} >
           {
             dataUser.loading ?
               <Loading /> : <CustomMaterialTable

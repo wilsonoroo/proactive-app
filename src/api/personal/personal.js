@@ -1,5 +1,6 @@
 import { basePath } from '../../config/config';
 import { checkVarible } from "../../utils/functions";
+
 export async function obtenerPersonalApi() {
     let url = `${basePath}/trabajador/all`;
 

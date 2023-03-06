@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import * as Icons from 'react-feather';
 import { useNavigate } from 'react-router-dom';
 import { cambiarEstadoUsuarioApi } from "../../api/usuariosAPI";
@@ -7,68 +7,106 @@ import CustomDivider from "../CustomDivider";
 import CustomInput from "../CustomInputs/CustomInput";
 import CustomMaterialTable from "../CustomMaterialTable/CustomMaterialTable";
 import CustomModalMensaje from "../CustomModalMensaje/CustomModalMensaje";
+import Loading from "../Loading";
 
-export default function TablaRequisitos({ usuarios, refreshData, onEdit = null }) {
+export default function TablaRequisitos({ vehiculos, refreshData, onEdit = null, loadingData }) {
+  const navigate = useNavigate();
   const [openModalMensaje, setOpenModalMensaje] = useState({
     titulo: "",
     descripcion: "",
     isActive: false,
-  });
+  });  
+  const [inputSearchValue, setInputSearchValue] = useState(null);
+  const [dataVehiculos, setDataVehiculos] = useState({ data: [], loading: false });
 
-  const navigate = useNavigate();
+  useEffect(() => {
+    setDataVehiculos({ data: vehiculos, loading: loadingData })
+  }, [vehiculos])
 
-  const [inputSearchValue, setInputSearchValue] = useState("");
+  useEffect(() => {
+    // console.log(inputSearchValue)
+    const timer = setTimeout(() => filteredVehiculos(), 1000);
+    return () => clearTimeout(timer);
+  }, [inputSearchValue])
 
-  const headerUsuarios = [
+  const asyncFilter = async (arr, predicate) =>
+    arr.reduce(async (memo, e) =>
+      [...await memo, ...await predicate(e) ? [e] : []]
+      , []);
+
+
+  const filteredVehiculos = async () => {
+    if (inputSearchValue !== null) {
+      setDataVehiculos({ ...dataVehiculos, loading: true })
+      let dataResult = await asyncFilter(vehiculos, dataFilters);
+      // console.log("=>>filterV", dataResult)
+      setDataVehiculos({ data: dataResult, loading: false })
+    }
+  }
+
+
+  const dataFilters = (e) => {
+    if (inputSearchValue.length !== 0) {
+      if (e.tipo || e.marca || e.modelo) {
+        if (e.tipo.toLowerCase().includes(inputSearchValue.toLowerCase()) ||
+          e.marca.toLowerCase().includes(inputSearchValue.toLowerCase()) ||
+          e.modelo.toLowerCase().includes(inputSearchValue.toLowerCase())) {
+          return true;
+        }
+      }
+      return false;
+    }
+    return true
+  }
+
+  const headerVehiculos = [
     {
-      id: 'num',
+      id: 'tipo',
       disablePadding: false,
-      label: '#',
+      label: 'Tipo',
       type: "string"
     },
     {
-      id: 'nombre',
+      id: 'patente',
       disablePadding: false,
-      label: 'Nombre Archivo',
+      label: 'Patente',
       type: "string"
     },
     {
-      id: 'codigo',
+      id: 'marca',
       disablePadding: false,
-      label: 'Código',
+      label: 'Marca',
       type: "string"
     },
     {
-      id: 'tipoArchivo',
+      id: 'modelo',
       disablePadding: false,
-      label: 'Tipo Archivo',
+      label: 'Modelo',
       type: "string"
     },
-
     {
-      id: 'puedeVencer',
+      id: 'numeroInterno',
       disablePadding: false,
-      label: '¿Caduca?',
-      type: "bool"
+      label: 'N° Interno',
+      type: "string"
     },
     {
-      id: 'obligatorioAcreditacion',
+      id: 'kilometraje',
       disablePadding: false,
-      label: '¿Obligatio para acreditar?',
-      type: "bool"
-    },
-
-    {
-      id: 'faenas',
-      disablePadding: false,
-      label: 'Faenas',
-      type: "faenas_view"
+      label: 'Kilometraje',
+      type: "string"
     },
     {
-      id: 'cargos',
+      id: 'estado',
       disablePadding: false,
-      label: 'Cargos',
-      type: "cargos_view"
+      label: 'Estado',
+      type: "string"
+    },
+    {
+      id: 'fechaMantención',
+      disablePadding: false,
+      label: 'Ultima Mantención',
+      type: "string"
     },
 
     {
@@ -92,15 +130,6 @@ export default function TablaRequisitos({ usuarios, refreshData, onEdit = null }
     }
   ];
 
-  const dataFilters = (e) => {
-    if (inputSearchValue.length > 1) {
-      if (e.nombre.toLowerCase().includes(inputSearchValue.toLowerCase()) || e.tipoArchivo.toLowerCase().includes(inputSearchValue.toLowerCase())) {
-        return true;
-      }
-      return false;
-    }
-    return true;
-  }
 
   const handleEliminar = (idUsuario) => {
     console.log("handleEliminar")
@@ -120,11 +149,15 @@ export default function TablaRequisitos({ usuarios, refreshData, onEdit = null }
       <div className="d-flex flex-column">
         <CustomInput placeholder="Ingrese Nombre del documento" inputSearchValue={inputSearchValue} setInputSearchValue={setInputSearchValue} />
         <CustomDivider />
-        <CustomMaterialTable
-          handleEliminar={handleEliminar}
-          headerData={headerUsuarios}
-          data={usuarios.filter((e) => dataFilters(e))}
-        />
+        {
+            dataVehiculos.loading ?
+              <Loading /> : <CustomMaterialTable
+                handleEliminar={handleEliminar}
+                headerData={headerVehiculos}
+                data={dataVehiculos.data}
+                numFila={20}
+              />
+        }
         <CustomModalMensaje
           titulo={"Creación de Usuario"}
           openModal={openModalMensaje.isActive}

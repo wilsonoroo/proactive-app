@@ -22,9 +22,9 @@ export default function useFetch(asyncFunction, initialData = []) {
 
     setTimeout(() => {
       asyncFunction().then(async (response) => {
-        if (isMounted.current && response?.status === 200) {
+        if (isMounted.current ) {
 
-          let data = await response.json()
+          let data = response
           setState({
             data: data,
             isLoading: false,

@@ -1,26 +1,46 @@
 import { Divider, Grid, Typography } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { Link } from "react-router-dom";
-import { obtenerPersonalApi } from "../../api/personal/personal";
 import useFetch from "../../hooks/useFetch";
 import MainContainer from "../../layouts/MainContainer";
 import AgregarDocsUsuarioFromFile from "./component/AgregarDocsUsuarioFromFile";
 import AgregarUsuario from "./component/AgregarUsuario";
 import AgregarUsuarioFromFile from "./component/AgregarUsuarioFromFile";
 import TablaUsuarios from "./component/TablaUsuarios";
+import { getUtils } from "../../services/database/empresaServices";
+import { getUsuarioByUid, getUsuarios, getUsuariosArray } from "../../services/database/usuariosServices";
 
 export default function UsuariosPage() {
   // titulo para el container y el html
   const tituloPage = "Usuarios";
+  const empresa = "shingeki_no_sushi";
   const [listaUsuarios, setListaUsuario] = useState([])
   // custom hook para realizar peticion
-  const { data: usuarios, firstLoading, refreshData, isLoading } = useFetch(() => obtenerPersonalApi());
+  const { data: usuarios, firstLoading, refreshData, isLoading } = useFetch(() => getUsuariosArray(empresa));
 
   useEffect(() => {
     console.log(usuarios.length, firstLoading)
     setListaUsuario(usuarios)
   }, [usuarios])
-  console.log(listaUsuarios)
+  console.log("AAAAAAAA", listaUsuarios)
+
+  // getUsuariosArray(empresa).then((value) => console.log(value) );
+
+
+  const [utils, setUtils] = useState([]);
+  useEffect(() => {
+    const fetchData = async () => {
+      const utilsData = await getUtils(empresa); // Llamamos a la función getUtils
+      if (utilsData) {
+        setUtils(utilsData); // Si hay datos, los guardamos en el estado
+      }
+    };
+    fetchData();
+  }, [empresa]);
+
+  // console.log(utils)
+
+
 
   return (
     <MainContainer titulo={tituloPage}>
@@ -54,15 +74,15 @@ export default function UsuariosPage() {
                 spacing={2}
               >
 
-                <Link to="/formato-user.xlsx" target="_blank" download>Descargar de formato</Link>
+                {/* <Link to="/formato-user.xlsx" target="_blank" download>Descargar de formato</Link> */}
                 <Grid item>
-                  <AgregarUsuario refreshData={refreshData} />
+                  <AgregarUsuario utils={utils} />
                 </Grid>
                 <Grid item>
-                  <AgregarUsuarioFromFile refreshData={refreshData} />
+                  {/* <AgregarUsuarioFromFile refreshData={refreshData} /> */}
                 </Grid>
                 <Grid item>
-                  <AgregarDocsUsuarioFromFile refreshData={refreshData} />
+                  {/* <AgregarDocsUsuarioFromFile refreshData={refreshData} /> */}
                 </Grid>
               </Grid>
             </Grid>

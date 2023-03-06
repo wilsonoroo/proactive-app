@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import * as Icons from 'react-feather';
 import { eliminarFaena, obtenerFaenasApi } from "../../api/faena/faenasApi";
 import CustomButton from "../../components/CustomButton/CustomButton";
@@ -6,14 +6,19 @@ import CustomDivider from "../../components/CustomDivider";
 import CustomModal from "../../components/CustomModal/CustomModal";
 import CustomModalMensaje from "../../components/CustomModalMensaje/CustomModalMensaje";
 import FormularioCrearFaena from "../../components/Faenas/FormularioCrearFaena";
+import { FormularioCrearFaenaV } from "../../components/Faenas/FormularioCrearFaenaV";
 import TablaFaenas from "../../components/Faenas/TablaFaenas";
 import Loading from "../../components/Loading";
 import useFetch from "../../hooks/useFetch";
 import MainContainer from "../../layouts/MainContainer";
+import { getUtils } from "../../services/database/empresaServices";
+import { getFaenasArray } from '../../services/database/faenasServices'
 
-export default function UsuariosPage() {
+export default function FaenasPage() {
   // titulo para el container y el html
   const tituloPage = "Faenas";
+  const empresa = "shingeki_no_sushi";
+
   const [openModal, setOpenModal] = useState(false);
   const [openModalMensaje, setOpenModalMensaje] = useState({
     titulo: "",
@@ -21,10 +26,49 @@ export default function UsuariosPage() {
     isActive: false,
   });
 
-
+  const [list, setList] = useState([]);
   // custom hook para realizar peticion
-  const { data: usuarios, firstLoading, refreshData } = useFetch(() => obtenerFaenasApi());
+  const { data: faenas, firstLoading, refreshData, isLoading } = useFetch(() => getFaenasArray(empresa));
+  const faenasList = useMemo(() => {
+    if (!faenas) {
+      return [];
+    }
+    const filteredFaenas = Object.keys(faenas).map((key) => faenas[key]).filter((faena) => faena.isEliminado === false);
+    console.log(filteredFaenas)
+    return filteredFaenas.map((faena) => ({
+      id: faena.id,
+      nombre: faena.nombre,
+      region: faena.region,
+      comuna: faena.comuna,
+      abreviatura: faena.abreviatura,
+      tipoFaena: faena.tipoFaena,
+      isVigente: faena.isVigente ? "Vigente" : "No Vigente"
 
+    }));
+  }, [faenas]);
+
+  useEffect(() => {
+    setList(faenasList);
+  }, [faenasList]);
+
+
+
+
+
+  const [utils, setUtils] = useState([]);
+  useEffect(() => {
+    const fetchData = async () => {
+      const utilsData = await getUtils(empresa); // Llamamos a la función getUtils
+      if (utilsData) {
+        setUtils(utilsData); // Si hay datos, los guardamos en el estado
+      }
+    };
+    fetchData();
+  }, [empresa]);
+  // console.log(utils)
+
+
+  
   const handleEliminar = (idUsuario) => {
     eliminarFaena(idUsuario).then((response) => {
       console.log(response);
@@ -43,14 +87,16 @@ export default function UsuariosPage() {
         <div className="h1">{tituloPage}</div>
         <CustomButton icon={Icons.PlusSquare} endIcon={true} typeColor="primary" onClick={() => setOpenModal(true)}>Nueva Faena</CustomButton>
         <CustomModal
-          titulo="Nueva Faena / Planta Industrial"
+          titulo="Nueva Faena "
           openModal={openModal}
           setOpenModal={setOpenModal}
         >
-          <FormularioCrearFaena setOpenModal={setOpenModal} setOpenModalMensaje={setOpenModalMensaje} refreshData={refreshData} />
+          {/* <FormularioCrearFaena setOpenModal={setOpenModal} setOpenModalMensaje={setOpenModalMensaje} refreshData={refreshData} /> */}
+          <FormularioCrearFaenaV utils={utils}/>
+          
         </CustomModal>
         <CustomModalMensaje
-          titulo={"Nueva Faena / Planta Industrial"}
+          titulo={"Nueva Faena "}
           openModal={openModalMensaje.isActive}
           setOpenModal={setOpenModalMensaje.isActive}
         >
@@ -72,7 +118,7 @@ export default function UsuariosPage() {
         firstLoading ?
           <Loading />
           :
-          <TablaFaenas usuarios={usuarios} refreshData={refreshData} onDelete={handleEliminar} />
+          <TablaFaenas faenas={list} refreshData={refreshData} onDelete={handleEliminar} loadingData={isLoading}/>
       }
     </MainContainer>
   );
