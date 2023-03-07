@@ -1,14 +1,11 @@
 import { Divider, Grid, Typography } from "@mui/material";
-import { useEffect, useState, useContext } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
 import useFetch from "../../hooks/useFetch";
 import MainContainer from "../../layouts/MainContainer";
-import AgregarDocsUsuarioFromFile from "./component/AgregarDocsUsuarioFromFile";
-import AgregarUsuario from "./component/AgregarUsuario";
-import AgregarUsuarioFromFile from "./component/AgregarUsuarioFromFile";
-import TablaUsuarios from "./component/TablaUsuarios";
 import { getUtils } from "../../services/database/empresaServices";
-import { getUsuarioByUid, getUsuarios, getUsuariosArray } from "../../services/database/usuariosServices";
+import { getUsuariosArray } from "../../services/database/usuariosServices";
+import AgregarUsuario from "./component/AgregarUsuario";
+import TablaUsuarios from "./component/TablaUsuarios";
 
 export default function UsuariosPage() {
   // titulo para el container y el html
@@ -19,7 +16,7 @@ export default function UsuariosPage() {
   const { data: usuarios, firstLoading, refreshData, isLoading } = useFetch(() => getUsuariosArray(empresa));
 
   useEffect(() => {
-    console.log(usuarios.length, firstLoading)
+    console.log(usuarios, firstLoading)
     setListaUsuario(usuarios)
   }, [usuarios])
   console.log("AAAAAAAA", listaUsuarios)

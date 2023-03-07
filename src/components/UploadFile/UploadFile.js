@@ -1,8 +1,8 @@
 import { Grid, LinearProgress, Link } from '@mui/material';
 import { useRef, useState } from 'react';
 import * as Icons from 'react-feather';
-import { upDateUploadFileApi } from '../../api/personal/personal';
 import ModalAddFile from '../../pages/Usuarios/Usuario/ModalAddFile';
+import { upDateUploadFileApi } from '../../services/personal/personal';
 import './UploadFile.scss';
 
 

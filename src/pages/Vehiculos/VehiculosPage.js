@@ -5,12 +5,12 @@ import CustomDivider from "../../components/CustomDivider";
 import CustomModal from "../../components/CustomModal/CustomModal";
 import CustomModalMensaje from "../../components/CustomModalMensaje/CustomModalMensaje";
 import Loading from "../../components/Loading";
+import { FormularioCrearVehiculoV } from "../../components/Vehiculos/FormularioCrearVehiculoV";
 import TablaVehiculos from "../../components/Vehiculos/TablaVehiculos";
 import useFetch from "../../hooks/useFetch";
 import MainContainer from "../../layouts/MainContainer";
-import { FormularioCrearVehiculoV } from "../../components/Vehiculos/FormularioCrearVehiculoV";
-import { getVehiculosArray, getVehiculos } from "../../services/database/vehiculosServices"
 import { getUtils } from "../../services/database/empresaServices";
+import { getVehiculos } from "../../services/database/vehiculosServices";
 
 
 export default function VehiculosPage() {
@@ -26,9 +26,9 @@ export default function VehiculosPage() {
     descripcion: "",
     isActive: false,
   });
-  
+
   const [dataSelect, setDataSelect] = useState(null);
-  
+
   const [list, setList] = useState([]);
   // custom hook para realizar peticion
   const { data: vehiculos, firstLoading, refreshData, isLoading } = useFetch(() => getVehiculos(empresa));
@@ -55,7 +55,7 @@ export default function VehiculosPage() {
     setList(vehiculosList);
   }, [vehiculosList]);
   // console.log(vehiculosList)
-  
+
 
 
   const handlerEdit = (data) => {
@@ -64,20 +64,20 @@ export default function VehiculosPage() {
     setOpenModal(true)
     setEdit(true)
   }
-  
 
-    const [utils, setUtils] = useState([]);
 
-    useEffect(() => {
-        const fetchData = async () => {
-        const utilsData = await getUtils(empresa); // Llamamos a la función getUtils
-        if (utilsData) {
-            setUtils(utilsData); // Si hay datos, los guardamos en el estado
-        }
-        };
-        fetchData();
-    }, [empresa]);
-    console.log(utils)
+  const [utils, setUtils] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const utilsData = await getUtils(empresa); // Llamamos a la función getUtils
+      if (utilsData) {
+        setUtils(utilsData); // Si hay datos, los guardamos en el estado
+      }
+    };
+    fetchData();
+  }, [empresa]);
+  console.log(utils)
 
   return (
     <MainContainer titulo={tituloPage}>
@@ -94,7 +94,7 @@ export default function VehiculosPage() {
           openModal={openModal}
           setOpenModal={setOpenModal}
         >
-          <FormularioCrearVehiculoV  utils={utils} />
+          <FormularioCrearVehiculoV utils={utils} />
           {/* <FormularioCrearRequisito setOpenModal={setOpenModal} setOpenModalMensaje={setOpenModalMensaje} refreshData={refreshData} data={dataSelect} edit={edit} /> */}
         </CustomModal>
         <CustomModalMensaje
@@ -120,7 +120,7 @@ export default function VehiculosPage() {
         firstLoading ?
           <Loading />
           :
-          <TablaVehiculos vehiculos={list} refreshData={refreshData} onEdit={handlerEdit} loadingData={isLoading}/>
+          <TablaVehiculos vehiculos={list} refreshData={refreshData} onEdit={handlerEdit} loadingData={isLoading} />
       }
     </MainContainer>
   );

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import * as Icons from 'react-feather';
 import { useNavigate } from 'react-router-dom';
-import { cambiarEstadoUsuarioApi } from "../../api/usuariosAPI";
+import { cambiarEstadoUsuarioApi } from "../../services/usuariosAPI";
 import CustomButton from "../CustomButton/CustomButton";
 import CustomDivider from "../CustomDivider";
 import CustomInput from "../CustomInputs/CustomInput";

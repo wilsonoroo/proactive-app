@@ -1,8 +1,8 @@
 import { Grid } from "@mui/material";
 import { useEffect, useState } from "react";
-import { obtenerPersonaPorCargolApi } from "../../../api/personal/personal";
-import { addUsuarioAsolicitud } from "../../../api/solicitudes/solicitud";
 import useFetch from "../../../hooks/useFetch";
+import { obtenerPersonaPorCargolApi } from "../../../services/personal/personal";
+import { addUsuarioAsolicitud } from "../../../services/solicitudes/solicitud";
 import { calcularEstado, checkVarible, procesarEstadoDocs } from "../../../utils/functions";
 import CustomInput from "../../CustomInputs/CustomInput";
 import CustomSelect from "../../CustomInputs/CustomSelect";

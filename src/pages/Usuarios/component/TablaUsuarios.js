@@ -2,11 +2,11 @@ import { Divider, Grid } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 // import { deleteTrabajador } from "../../../api/usuariosAPI";
-import { deleteTrabajador } from "../../../services/database/usuariosServices"
+import PropTypes from 'prop-types';
 import CustomInput from "../../../components/CustomInputs/CustomInput";
 import CustomMaterialTable from "../../../components/CustomMaterialTable/CustomMaterialTable";
 import Loading from "../../../components/Loading";
-
+import { deleteTrabajador } from "../../../services/database/usuariosServices";
 
 
 
@@ -54,7 +54,7 @@ export default function TablaUsuarios({ usuarios, refreshData, loadingData }) {
   }
 
 
-  const handleEliminar = (empresa = "shingeki_no_sushi", uid="DlnC8ZGgJ4XCCCmPbUqOOPWjtWJ2") => {
+  const handleEliminar = (empresa = "shingeki_no_sushi", uid = "DlnC8ZGgJ4XCCCmPbUqOOPWjtWJ2") => {
     console.log(`Eliminar usuario de la empresa ${empresa} con uid ${uid}`);
     // console.log("=>>handleEliminar");
     setDataUser({ ...dataUser, loading: true });
@@ -67,7 +67,7 @@ export default function TablaUsuarios({ usuarios, refreshData, loadingData }) {
     });
   };
 
-  
+
   const asyncFilter = async (arr, predicate) =>
     arr.reduce(async (memo, e) =>
       [...await memo, ...await predicate(e) ? [e] : []]
@@ -128,7 +128,7 @@ export default function TablaUsuarios({ usuarios, refreshData, loadingData }) {
       type: "string"
     },
     {
-      id: '_id',
+      id: 'id',
       disablePadding: false,
       label: 'Acciones',
       type: "acciones",
@@ -139,7 +139,7 @@ export default function TablaUsuarios({ usuarios, refreshData, loadingData }) {
         },
         {
           type: "view",
-          function: (id) => navigate(`./${id._id}`)
+          function: (id) => navigate(`./${id.id}`)
         }
       ]
     }
@@ -179,3 +179,9 @@ export default function TablaUsuarios({ usuarios, refreshData, loadingData }) {
     </>
   );
 }
+
+TablaUsuarios.propTypes = {
+  usuarios: PropTypes.array,
+  refreshData: PropTypes.func,
+  loadingData: PropTypes.bool
+};

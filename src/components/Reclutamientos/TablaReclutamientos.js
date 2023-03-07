@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { actualizarSoicitudReclutamiento } from "../../api/solicitudes/solicitud";
+import { actualizarSoicitudReclutamiento } from "../../services/solicitudes/solicitud";
 import CustomDivider from "../CustomDivider";
 import CustomDatePicker from "../CustomInputs/CustomDatePicker";
 import CustomInput from "../CustomInputs/CustomInput";

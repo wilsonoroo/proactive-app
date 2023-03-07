@@ -4,7 +4,7 @@ import LogoProactive from '../../assets/logo.png';
 import CustomButton from "../../components/CustomButton/CustomButton";
 import useAuth from "../../hooks/useAuth";
 import useForm from "../../hooks/useForm";
-import './IngresarPage.scss';
+import './LoginPage.scss';
 
 export default function Login() {
 
@@ -94,9 +94,7 @@ export default function Login() {
                       </div>
                       {isError && <span className="text-danger">Las credenciales ingresadas son incorrectas.</span>}
                       <div className="d-flex justify-content-end my-2">
-                        <CustomButton typeColor="primary" isLoading={isLoading} type={"submit"} onClick={() => {
-
-                        }}>Ingresar</CustomButton>
+                        <CustomButton typeColor="primary" isLoading={isLoading} type={"submit"} >Ingresar</CustomButton>
                       </div>
                       <div className="texto-powered mt-4">Software Reclutamiento Proactive powered by AKROM</div>
                     </form>

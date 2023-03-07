@@ -2,7 +2,8 @@ import { child, get, push, ref, remove, set, update } from "firebase/database";
 import { ref as ref2, uploadBytes } from "firebase/storage";
 import { pickBy } from 'lodash';
 import { database, storage } from "../config";
-const axios = require('axios');
+
+import axios from 'axios';
 //import admin from "firebase-admin";
 
 /**

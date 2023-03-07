@@ -4,9 +4,9 @@ import JSZip from "jszip";
 import moment from 'moment';
 import { useEffect, useRef, useState } from 'react';
 import * as Icons from 'react-feather';
-import { upDateUploadFileApiWithRut } from '../../api/personal/personal';
-import { obtenerRequisitosApi } from '../../api/requisitos/requisitos';
 import useFetch from '../../hooks/useFetch';
+import { upDateUploadFileApiWithRut } from '../../services/personal/personal';
+import { obtenerRequisitosApi } from '../../services/requisitos/requisitos';
 import './UploadFileCargaUsuario.scss';
 
 

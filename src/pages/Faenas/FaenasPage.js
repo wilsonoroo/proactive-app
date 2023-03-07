@@ -1,18 +1,18 @@
 import { useEffect, useMemo, useState } from "react";
 import * as Icons from 'react-feather';
-import { eliminarFaena, obtenerFaenasApi } from "../../api/faena/faenasApi";
 import CustomButton from "../../components/CustomButton/CustomButton";
 import CustomDivider from "../../components/CustomDivider";
 import CustomModal from "../../components/CustomModal/CustomModal";
 import CustomModalMensaje from "../../components/CustomModalMensaje/CustomModalMensaje";
-import FormularioCrearFaena from "../../components/Faenas/FormularioCrearFaena";
 import { FormularioCrearFaenaV } from "../../components/Faenas/FormularioCrearFaenaV";
+
 import TablaFaenas from "../../components/Faenas/TablaFaenas";
 import Loading from "../../components/Loading";
 import useFetch from "../../hooks/useFetch";
 import MainContainer from "../../layouts/MainContainer";
 import { getUtils } from "../../services/database/empresaServices";
-import { getFaenasArray } from '../../services/database/faenasServices'
+import { getFaenasArray } from '../../services/database/faenasServices';
+
 
 export default function FaenasPage() {
   // titulo para el container y el html
@@ -68,18 +68,7 @@ export default function FaenasPage() {
   // console.log(utils)
 
 
-  
-  const handleEliminar = (idUsuario) => {
-    eliminarFaena(idUsuario).then((response) => {
-      console.log(response);
-      if (response?.status === 200) {
-        refreshData();
-        setOpenModalMensaje({ titulo: "!Faena eliminada!", descripcion: "La faena ha sido eliminada. Por favor revisa la información ingresada.", isActive: true });
-      } else {
-        setOpenModalMensaje({ titulo: "!Algo ha salido mal!", descripcion: "No se ha creado un nuevo Perfil de Usuario. Por favor revisa la información ingresada.", isActive: true });
-      }
-    });
-  }
+
 
   return (
     <MainContainer titulo={tituloPage}>
@@ -92,8 +81,8 @@ export default function FaenasPage() {
           setOpenModal={setOpenModal}
         >
           {/* <FormularioCrearFaena setOpenModal={setOpenModal} setOpenModalMensaje={setOpenModalMensaje} refreshData={refreshData} /> */}
-          <FormularioCrearFaenaV utils={utils}/>
-          
+          <FormularioCrearFaenaV utils={utils} />
+
         </CustomModal>
         <CustomModalMensaje
           titulo={"Nueva Faena "}
@@ -118,7 +107,7 @@ export default function FaenasPage() {
         firstLoading ?
           <Loading />
           :
-          <TablaFaenas faenas={list} refreshData={refreshData} onDelete={handleEliminar} loadingData={isLoading}/>
+          <TablaFaenas faenas={list} refreshData={refreshData} loadingData={isLoading} />
       }
     </MainContainer>
   );

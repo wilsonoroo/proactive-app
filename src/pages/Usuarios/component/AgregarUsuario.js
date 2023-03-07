@@ -3,7 +3,8 @@ import * as Icons from 'react-feather';
 import CustomButton from "../../../components/CustomButton/CustomButton";
 import CustomModal from "../../../components/CustomModal/CustomModal";
 import CustomModalMensaje from "../../../components/CustomModalMensaje/CustomModalMensaje";
-import FormularioCrearUsuario from "./FormularioCrearUsuario";
+
+import PropTypes from 'prop-types';
 import { FormularioCrearUsuarioV } from "./FormularioCrearUsuarioV";
 
 export default function AgregarUsuario(props) {
@@ -48,3 +49,7 @@ export default function AgregarUsuario(props) {
     </div>
   );
 }
+
+AgregarUsuario.propTypes = {
+  utils: PropTypes.object
+};

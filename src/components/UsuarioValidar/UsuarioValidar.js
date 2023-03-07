@@ -1,9 +1,9 @@
 import { Divider, Grid } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { obtenerRequisitosPorFAena } from '../../api/requisitos/requisitos';
 import useFetch from '../../hooks/useFetch';
 import UsuarioPagePorProyectoModal from '../../pages/Usuarios/Usuario/UsuarioPagePorProyectoModal';
+import { obtenerRequisitosPorFAena } from '../../services/requisitos/requisitos';
 import { groupByTipoArchivo } from '../../utils/functions';
 import CustomModalFull from '../CustomModalFull/CustomModalFull';
 import EnviarMensaje from '../EnviarMensaje/EnviarMensaje';

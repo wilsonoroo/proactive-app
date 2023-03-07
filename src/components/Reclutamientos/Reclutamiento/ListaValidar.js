@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { deleteUsuarioAsolicitud } from "../../../api/solicitudes/solicitud";
+import { deleteUsuarioAsolicitud } from "../../../services/solicitudes/solicitud";
 import CustomSelect from "../../CustomInputs/CustomSelect";
 import MaterialContainer from "../../MaterialContainer/MaterialContainer";
 import UsuarioValidar from "../../UsuarioValidar/UsuarioValidar";

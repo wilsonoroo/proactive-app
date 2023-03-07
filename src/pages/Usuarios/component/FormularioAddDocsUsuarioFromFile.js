@@ -2,9 +2,9 @@ import { Box, Grid, Paper, Step, StepLabel, Stepper, Typography } from '@mui/mat
 import { useFormik } from 'formik';
 import { useState } from 'react';
 import * as Icons from 'react-feather';
-import { crearTrabajadorApi } from '../../../api/personal/personal';
 import CustomButton from '../../../components/CustomButton/CustomButton';
 import UploadFileDocsUsuario from '../../../components/UploadFileDocsUsuario/UploadFileDocsUsuario';
+import { crearTrabajadorApi } from '../../../services/personal/personal';
 
 
 export default function FormularioAddDocsUsuarioFromFile({ setOpenModal, setOpenModalMensaje, refreshData }) {
