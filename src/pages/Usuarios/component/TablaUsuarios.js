@@ -139,7 +139,7 @@ export default function TablaUsuarios({ usuarios, refreshData, loadingData }) {
         },
         {
           type: "view",
-          function: (id) => navigate(`./${id.id}`)
+          function: (id) => navigate(`./shingeki_no_sushi/${id.id}`)
         }
       ]
     }
@@ -181,7 +181,7 @@ export default function TablaUsuarios({ usuarios, refreshData, loadingData }) {
 }
 
 TablaUsuarios.propTypes = {
-  usuarios: PropTypes.array,
+  usuarios: PropTypes.object,
   refreshData: PropTypes.func,
   loadingData: PropTypes.bool
 };

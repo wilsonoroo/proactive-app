@@ -12,6 +12,8 @@ import CustomModal from "../../../components/CustomModal/CustomModal";
 import CustomModalMensaje from "../../../components/CustomModalMensaje/CustomModalMensaje";
 
 
+import useFetch from "../../../hooks/useFetch";
+import { getUsuario, getUsuarioByUid } from "../../../services/database/usuariosServices";
 import DetallesUsuario from "../component/Usuario/DetallesUsuario";
 
 
@@ -21,11 +23,12 @@ export default function UsuariosPage() {
   const tituloPage = "Usuarios";
   const params = useParams();
 
-  const { id: idParams } = params;
+  const { id: idParams, idEmpresa: idEmpresa } = params;
+
 
   const [openModal, setOpenModal] = useState(false);
-  const [usuario, setUsuario] = useState({})
-  const [firstLoading, setFirstLoading] = useState({})
+
+
   const [openModalMensaje, setOpenModalMensaje] = useState({
     titulo: "",
     descripcion: "",
@@ -33,7 +36,10 @@ export default function UsuariosPage() {
   });
   const [fotoPerfil, setFotoPerfil] = useState(null);
 
+  const { data: userv, firstLoading, refreshData: refreshDataFaenas } = useFetch(() => getUsuarioByUid(idParams));
+  const { data: usuario, firstLoadingUsuario, refreshData: refreshDataUsuario } = useFetch(() => getUsuario(idParams, idEmpresa));
 
+  console.log(userv)
 
 
 

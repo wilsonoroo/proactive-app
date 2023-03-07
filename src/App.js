@@ -20,7 +20,8 @@ export default function App() {
         <Route path="vehiculos" element={<PublicRoute permisos={["vendedor"]} componente={VehiculosPage} />} />
         <Route path="faenas" element={<PublicRoute permisos={["vendedor"]} componente={FaenasPage} />} />
         <Route path="usuarios" element={<PrivateRoute permisos={["vendedor"]} componente={UsuariosPage} />} />
-        <Route path="usuarios/:id" element={<PrivateRoute permisos={["vendedor"]} componente={UsuarioPage} />} />
+        {/* <Route path="usuarios/:id" element={<PrivateRoute permisos={["vendedor"]} componente={UsuarioPage} />} /> */}
+        <Route path="usuarios/:idEmpresa/:id" element={<PrivateRoute permisos={["vendedor"]} componente={UsuarioPage} />} />
         <Route path="*" element={<Error404Page />} />
       </Routes>
 
