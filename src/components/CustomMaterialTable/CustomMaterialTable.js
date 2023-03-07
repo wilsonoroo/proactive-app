@@ -9,8 +9,8 @@ import { visuallyHidden } from '@mui/utils';
 import * as React from 'react';
 import * as Icons from 'react-feather';
 import { useNavigate } from 'react-router-dom';
-import CustomCargoView from '../CustomCargosView/CustomCargoView';
-import CustomFaenasView from '../CustomFaenasView/CustomFaenasView';
+
+
 import CustomImagenAvatar from '../CustomImagenAvatar';
 import CustomProgresoCircular from '../CustomProgresoCircular/CustomProgresoCircular';
 
@@ -402,7 +402,7 @@ export default function CustomMaterialTable({ data, idOrder, handleEliminar, hea
                                 padding="normal"
                               >
                                 <div className='d-flex justify-content-start ms-2'>
-                                  <CustomFaenasView valor={row[e.id]} />
+                                  {row[e.id]}
                                 </div>
                               </TableCell>
                             );
@@ -427,7 +427,7 @@ export default function CustomMaterialTable({ data, idOrder, handleEliminar, hea
                                 padding="none"
                               >
                                 <div className='d-flex justify-content-start ms-2'>
-                                  <CustomCargoView valor={row[e.id]} />
+                                  {row[e.id]}
                                 </div>
                               </TableCell>
                             );
@@ -532,6 +532,6 @@ CustomMaterialTable.propTypes = {
   headerData: PropTypes.shape({
     map: PropTypes.func
   }),
-  idOrder: PropTypes.anyy,
+  idOrder: PropTypes.any,
   numFila: PropTypes.number
 }
