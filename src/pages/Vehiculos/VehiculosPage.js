@@ -9,7 +9,7 @@ import TablaVehiculos from "../../components/Vehiculos/TablaVehiculos";
 import useFetch from "../../hooks/useFetch";
 import MainContainer from "../../layouts/MainContainer";
 import { FormularioCrearVehiculoV } from "../../components/Vehiculos/FormularioCrearVehiculoV";
-import { getVehiculosArray, getVehiculos } from "../../services/database/vehiculosServices"
+import { getVehiculosArray, getVehiculos, eliminarVehiculo } from "../../services/database/vehiculosServices"
 import { getUtils } from "../../services/database/empresaServices";
 
 
@@ -37,7 +37,7 @@ export default function VehiculosPage() {
       return [];
     }
     const filteredVehiculos = Object.keys(vehiculos).map((key) => vehiculos[key]).filter((vehiculo) => vehiculo.isEliminado === false);
-    console.log(filteredVehiculos)
+    // console.log(filteredVehiculos)
     return filteredVehiculos.map((vehiculo) => ({
       id: vehiculo.id,
       tipo: vehiculo.tipo,
@@ -77,7 +77,22 @@ export default function VehiculosPage() {
         };
         fetchData();
     }, [empresa]);
-    console.log(utils)
+    // console.log(utils)
+
+    const handleEliminar = (id) => {
+
+      eliminarVehiculo(id, empresa).then(() => {
+        console.log("Vehiculo Eliminada")
+        setOpenModalMensaje({ titulo: "!Vehiculo eliminada!", descripcion: "El vehiculo ha sido eliminada.", isEliminado: true });
+        refreshData();
+      }).catch(error => {
+        console.log(error);
+        setList({ ...list, loading: false });      
+          setOpenModalMensaje({ titulo: "!Algo ha salido mal!", isEliminado: true });
+  
+      });
+    }
+
 
   return (
     <MainContainer titulo={tituloPage}>
@@ -120,7 +135,7 @@ export default function VehiculosPage() {
         firstLoading ?
           <Loading />
           :
-          <TablaVehiculos vehiculos={list} refreshData={refreshData} onEdit={handlerEdit} loadingData={isLoading}/>
+          <TablaVehiculos vehiculos={list} refreshData={refreshData} onDelete={handleEliminar} onEdit={handlerEdit} loadingData={isLoading}/>
       }
     </MainContainer>
   );

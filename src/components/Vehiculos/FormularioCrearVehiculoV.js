@@ -6,9 +6,10 @@ import CustomSelectMultiple from '../CustomInputs/CustomSelectMultiple';
 import CustomTextField from '../CustomInputs/CustomTextField';
 import CustomDatePicker from '../CustomInputs/CustomDatePicker';
 import { useEffect, useState } from 'react';
+import { crearVehiculo } from "../../services/database/vehiculosServices"
 
 export const FormularioCrearVehiculoV = (props) => {
-
+    const uuid = require("uuid");
     const utils = props?.utils;
     // console.log(utils)
 
@@ -23,42 +24,42 @@ export const FormularioCrearVehiculoV = (props) => {
     });   
     // console.log(listTipos)
 
-    const validationSchema = yup.object({        
+    const validationSchema = yup.object({    
         tipo: yup
           .string('')
-          .required('Este campo es requerido'),
+          .required("El tipo es obligatorio"),
         tipoVehiculo: yup
           .string('')
-          .required('Este campo es requerido'),
+          .required("El tipo de vehículo es obligatorio"),
         patente: yup
           .string('')
-          .required('Este campo es requerido'),
+          .required("La patente es obligatoria"),
         numeroInterno: yup
           .string('')
-          .required('Este campo es requerido'),
+          .required("El numero interno es obligatorio"),
         marca: yup
           .string('')
           .required('Este campo es requerido'),
         modelo: yup
           .string('')
-          .required('Este campo es requerido'),
+          .required("El modelo es obligatorio"),
         kilometraje: yup
-          .string('')
-          .required('Este campo es requerido'),
+          .number()
+          .required("El kilometraje debe ser un valor numérico"),
         fechaVencimiento: yup
-          .date()
-          .required('Este campo es requerido'),
-        ultimaMantencion: yup
-          .string('')
-          .required('Este campo es requerido'),
-        proximaMantencion: yup
-          .string('')
-          .required('Este campo es requerido'),
+          .string()
+          .required("El vencimiento de la revisión técnica es obligatorio"),
+        // ultimaMantencion: yup
+        //   .string('')
+        //   .required('Este campo es requerido'),
+        // proximaMantencion: yup
+        //   .string('')
+        //   .required('Este campo es requerido'),
       });
 
     const formik = useFormik({
         initialValues: { 
-            // id:'',
+            id: uuid.v4(),
             tipo: '',
             tipoVehiculo: '',
             patente: '',
@@ -76,9 +77,9 @@ export const FormularioCrearVehiculoV = (props) => {
         validationSchema: validationSchema,
         onSubmit: (values) => {
           console.log(values)
-        //   guardarRegistro(values.nombre, values.email, values.edad, values.empresa, values.calzado );
-          
-        //   resetForm();
+          const empresa = "shingeki_no_sushi";
+          crearVehiculo(values, empresa)
+          // resetForm();
         },
     });
 
@@ -166,7 +167,7 @@ export const FormularioCrearVehiculoV = (props) => {
                         defaultValue={""}
                         // value={fechaVencimiento}
                         onChange={(e) => {
-                        formik.setFieldValue("fechaVencimiento", Date.parse(e.target.value));
+                        formik.setFieldValue("fechaVencimiento", (e.target.value));
                         // console.log("onChange", e.target.value)
                     }} />
                 </div>
@@ -182,7 +183,7 @@ export const FormularioCrearVehiculoV = (props) => {
                         defaultValue={""}
                         // value={fechaVencimiento}
                         onChange={(e) => {
-                        formik.setFieldValue("ultimaMantencion", Date.parse(e.target.value));
+                        formik.setFieldValue("ultimaMantencion", (e.target.value));
                         // console.log("onChange", e.target.value)
                     }} />
                 </div>
@@ -195,7 +196,7 @@ export const FormularioCrearVehiculoV = (props) => {
                         defaultValue={""}
                         // value={fechaVencimiento}
                         onChange={(e) => {
-                        formik.setFieldValue("proximaMantencion", Date.parse(e.target.value));
+                        formik.setFieldValue("proximaMantencion", (e.target.value));
                         // console.log("onChange", e.target.value)
                     }} />
                 </div>

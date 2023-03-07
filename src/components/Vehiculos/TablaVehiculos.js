@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import * as Icons from 'react-feather';
 import { useNavigate } from 'react-router-dom';
 import { cambiarEstadoUsuarioApi } from "../../api/usuariosAPI";
+import { eliminarVehiculo } from "../../services/database/vehiculosServices";
 import CustomButton from "../CustomButton/CustomButton";
 import CustomDivider from "../CustomDivider";
 import CustomInput from "../CustomInputs/CustomInput";
@@ -9,7 +10,7 @@ import CustomMaterialTable from "../CustomMaterialTable/CustomMaterialTable";
 import CustomModalMensaje from "../CustomModalMensaje/CustomModalMensaje";
 import Loading from "../Loading";
 
-export default function TablaRequisitos({ vehiculos, refreshData, onEdit = null, loadingData }) {
+export default function TablaRequisitos({ vehiculos, refreshData, onEdit = null, onDelete, loadingData }) {
   const navigate = useNavigate();
   const [openModalMensaje, setOpenModalMensaje] = useState({
     titulo: "",
@@ -110,36 +111,31 @@ export default function TablaRequisitos({ vehiculos, refreshData, onEdit = null,
     },
 
     {
-      id: '_id',
+      id: 'id',
       disablePadding: false,
       label: 'Acciones',
       type: "acciones",
       acciones: [
+        // {
+        //   type: "edit",
+        //   function: onEdit ? onEdit : (id) => { }
+        // },
+        // {
+        //   type: "view",
+        //   function: (id) => navigate(`./${id}`)
+        // }, 
         {
-          type: "edit",
-          function: onEdit ? onEdit : (id) => { }
-        },
-        {
-          type: "view",
-          function: (id) => navigate(`./${id}`)
-        }, {
           type: "delete",
-          function: (id) => { }
+          function: (id) => console.log("delete", id)
         },
       ]
     }
   ];
 
 
-  const handleEliminar = (idUsuario) => {
-    console.log("handleEliminar")
-    setOpenModalMensaje({ titulo: "!Algo ha salido mal!", descripcion: "No se ha creado un nuevo Perfil de Usuario. Por favor revisa la información ingresada.", isActive: true });
-    cambiarEstadoUsuarioApi(idUsuario).then((response) => {
-      console.log(response);
-      if (response?.success === "OK") {
-        refreshData();
-      }
-    });
+  const handleEliminar = (idVehiculo) => {
+    onDelete(idVehiculo)
+
   }
 
 

@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import * as Icons from 'react-feather';
-import { eliminarFaena, obtenerFaenasApi } from "../../api/faena/faenasApi";
+// import { eliminarFaena, obtenerFaenasApi } from "../../api/faena/faenasApi";
 import CustomButton from "../../components/CustomButton/CustomButton";
 import CustomDivider from "../../components/CustomDivider";
 import CustomModal from "../../components/CustomModal/CustomModal";
@@ -12,7 +12,7 @@ import Loading from "../../components/Loading";
 import useFetch from "../../hooks/useFetch";
 import MainContainer from "../../layouts/MainContainer";
 import { getUtils } from "../../services/database/empresaServices";
-import { getFaenasArray } from '../../services/database/faenasServices'
+import { getFaenasArray, eliminarFaena } from '../../services/database/faenasServices'
 
 export default function FaenasPage() {
   // titulo para el container y el html
@@ -34,7 +34,7 @@ export default function FaenasPage() {
       return [];
     }
     const filteredFaenas = Object.keys(faenas).map((key) => faenas[key]).filter((faena) => faena.isEliminado === false);
-    console.log(filteredFaenas)
+    // console.log(filteredFaenas)
     return filteredFaenas.map((faena) => ({
       id: faena.id,
       nombre: faena.nombre,
@@ -69,15 +69,17 @@ export default function FaenasPage() {
 
 
   
-  const handleEliminar = (idUsuario) => {
-    eliminarFaena(idUsuario).then((response) => {
-      console.log(response);
-      if (response?.status === 200) {
-        refreshData();
-        setOpenModalMensaje({ titulo: "!Faena eliminada!", descripcion: "La faena ha sido eliminada. Por favor revisa la información ingresada.", isActive: true });
-      } else {
-        setOpenModalMensaje({ titulo: "!Algo ha salido mal!", descripcion: "No se ha creado un nuevo Perfil de Usuario. Por favor revisa la información ingresada.", isActive: true });
-      }
+  const handleEliminar = (id) => {
+    // setList({ ...list, loading: true });
+    eliminarFaena(id, empresa).then(() => {
+      console.log("Faena Eliminada")
+      setOpenModalMensaje({ titulo: "!Faena eliminada!", descripcion: "La faena ha sido eliminada.", isEliminado: true });
+      refreshData();
+    }).catch(error => {
+      console.log(error);
+      setList({ ...list, loading: false });      
+        setOpenModalMensaje({ titulo: "!Algo ha salido mal!", isEliminado: true });
+
     });
   }
 

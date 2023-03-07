@@ -128,9 +128,9 @@ export const FormularioCrearUsuarioV = (props) => {
         validationSchema: validationSchema,
         onSubmit: (values) => {
             const empresa = "shingeki_no_sushi";
-            console.log(values, empresa)
-
-          guardarDatosEnFirebase(values, empresa)
+            console.log( values.email, values.password, empresa)
+            
+        //   guardarDatosEnFirebase(values, empresa)
         //   resetForm();
         },
         // validationSchema,    

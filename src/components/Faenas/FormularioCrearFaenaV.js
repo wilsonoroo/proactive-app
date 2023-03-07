@@ -2,11 +2,12 @@ import { Button, FormControlLabel, Grid, Switch } from '@mui/material';
 import { useFormik } from 'formik';
 import { useEffect, useState } from 'react';
 import * as yup from 'yup';
+import { crearFaena } from '../../services/database/faenasServices';
 import CustomSelect from '../CustomInputs/CustomSelect'
 import CustomTextField from '../CustomInputs/CustomTextField'
 
 export const FormularioCrearFaenaV = (props) => {
-
+    const uuid = require("uuid");
     const utils = props?.utils;
     const listRegiones = Object.keys(utils?.faenas?.regiones).map((key) => {
         const region = utils?.faenas?.regiones[key];
@@ -45,7 +46,7 @@ export const FormularioCrearFaenaV = (props) => {
 
     const formik = useFormik({
         initialValues: {
-        //   id:'',
+          id: uuid.v4(),
           nombre: '',
           abreviatura: '',
           region: '',
@@ -57,8 +58,8 @@ export const FormularioCrearFaenaV = (props) => {
         validationSchema: validationSchema,
         onSubmit: (values) => {
           console.log(values)
-        //   guardarRegistro(values.nombre, values.email, values.edad, values.empresa, values.calzado );
-          
+          const empresa = "shingeki_no_sushi";
+          crearFaena(values, empresa)
         //   resetForm();
         },         
     });

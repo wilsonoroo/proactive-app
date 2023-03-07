@@ -57,12 +57,8 @@ export default function TablaFaenas({ faenas, refreshData, onDelete, loadingData
   }
 
 
-
-
-
-
-  const handleEliminar = (idUsuario) => {
-    onDelete(idUsuario)
+  const handleEliminar = (idFaena) => {
+    onDelete(idFaena)
 
   }
 
@@ -110,7 +106,7 @@ export default function TablaFaenas({ faenas, refreshData, onDelete, loadingData
     //   type: "bool"
     // },
     {
-      id: '_id',
+      id: 'id',
       disablePadding: false,
       label: 'Acciones',
       type: "acciones",
