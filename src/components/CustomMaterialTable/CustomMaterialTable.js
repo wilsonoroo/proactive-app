@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import './CustomMaterialTable.scss';
 
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -126,6 +127,18 @@ function EnhancedTableHead(props) {
   );
 }
 
+EnhancedTableHead.propTypes = {
+  headerData: PropTypes.shape({
+    map: PropTypes.func
+  }),
+  numSelected: PropTypes.any,
+  onRequestSort: PropTypes.func,
+  onSelectAllClick: PropTypes.any,
+  order: PropTypes.string,
+  orderBy: PropTypes.any,
+  rowCount: PropTypes.any
+}
+
 const EnhancedTableToolbar = (props) => {
   const { numSelected } = props;
 
@@ -177,6 +190,16 @@ const EnhancedTableToolbar = (props) => {
   );
 };
 
+EnhancedTableToolbar.propTypes = {
+  numSelected: PropTypes.number
+}
+
+/**
+ * Una función que devuelve una tabla con los datos que se pasan como parámetro.
+ */
+/**
+ * Una función que devuelve una tabla con los datos que se pasan como parámetro.
+ */
 export default function CustomMaterialTable({ data, idOrder, handleEliminar, headerData, numFila = 20 }) {
 
   const navigate = useNavigate();
@@ -497,4 +520,18 @@ export default function CustomMaterialTable({ data, idOrder, handleEliminar, hea
     </Box >
 
   );
+}
+
+
+CustomMaterialTable.propTypes = {
+  data: PropTypes.shape({
+    length: PropTypes.any,
+    map: PropTypes.func
+  }),
+  handleEliminar: PropTypes.func,
+  headerData: PropTypes.shape({
+    map: PropTypes.func
+  }),
+  idOrder: PropTypes.anyy,
+  numFila: PropTypes.number
 }

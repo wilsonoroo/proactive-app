@@ -1,5 +1,6 @@
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
+import PropTypes from "prop-types";
 import * as Icons from 'react-feather';
 import './CustomModalMensaje.scss';
 
@@ -27,4 +28,12 @@ export default function CustomModalMensaje({ openModal, setOpenModal, titulo, ch
       </Box>
     </Modal>
   );
+}
+
+CustomModalMensaje.propTypes = {
+  children: PropTypes.any,
+  onClose: PropTypes.any,
+  openModal: PropTypes.any,
+  setOpenModal: PropTypes.any,
+  titulo: PropTypes.any
 }

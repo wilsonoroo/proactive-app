@@ -1,5 +1,6 @@
 import { TextField } from "@mui/material";
 import { createTheme } from '@mui/material/styles';
+import PropTypes from "prop-types";
 
 const theme = createTheme({
   components: {
@@ -65,4 +66,17 @@ export default function CustomTextField({ name, label, formik, placeholder = "",
     />
     // </ThemeProvider>
   );
+}
+CustomTextField.propTypes = {
+  disabled: PropTypes.bool,
+  formik: PropTypes.shape({
+    errors: PropTypes.any,
+    handleChange: PropTypes.any,
+    touched: PropTypes.any,
+    values: PropTypes.any
+  }),
+  label: PropTypes.any,
+  name: PropTypes.any,
+  placeholder: PropTypes.string,
+  type: PropTypes.string
 }

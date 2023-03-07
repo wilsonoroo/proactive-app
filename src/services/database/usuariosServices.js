@@ -302,6 +302,7 @@ export async function deleteTrabajador(empresa, uid) {
 
 
 
+
 export async function guardarDatosEnFirebase(values, empresa) {
   try {
     const dbRef = ref(database, `empresas/${empresa}/usuarios/auth`);

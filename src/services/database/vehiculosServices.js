@@ -60,3 +60,20 @@ export async function crearVehiculo(data, empresa){
     return false;
   }
 }
+
+export async function eliminarVehiculo(vehiculoId, empresa) {
+  // const db = getDatabase();
+
+  try {
+      await update(ref(database, `empresas/${empresa}/vehiculos/${vehiculoId}`), {
+          isEliminado: true
+      });
+      console.log("Vehiculo eliminado correctamente");
+
+      return true;
+
+  } catch (err) {
+      console.log(err);
+      return false;
+  }
+}

@@ -1,7 +1,7 @@
 import { Divider, Typography } from "@mui/material";
 import moment from "moment";
-
-export default function DetallesUsuario({ usuario }) {
+import PropTypes from 'prop-types';
+export default function DetallesUsuario({ usuario = {} }) {
 
   const calculateAge = (dob1) => {
     var today = new Date();
@@ -116,4 +116,8 @@ export default function DetallesUsuario({ usuario }) {
       </div>
     </div>
   );
+}
+
+DetallesUsuario.propTypes = {
+  usuario: PropTypes.object,
 }

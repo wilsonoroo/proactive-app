@@ -1,5 +1,6 @@
 import { Box, Grid, Paper, Step, StepLabel, Stepper, Typography } from '@mui/material';
 import { useFormik } from 'formik';
+import PropTypes from 'prop-types';
 import { useState } from 'react';
 import * as Icons from 'react-feather';
 import CustomButton from '../../../components/CustomButton/CustomButton';
@@ -164,13 +165,12 @@ export default function FormularioAddDocsUsuarioFromFile({ setOpenModal, setOpen
   );
 }
 
-const nacionalidadItems = [{ nombre: "Chile", valor: "chile" }, { nombre: "Peru", valor: "peru" }, { nombre: "Colombia", valor: "colombia" }]
-const estadoCivilItems = [{ nombre: "Soltero", valor: "soltero" }, { nombre: "Casado", valor: "casado" }, { nombre: "Viudo", valor: "viudo" }]
-const AFPitems = [{ nombre: "AFP Habitat", valor: "afp_habitat" }, { nombre: "AFP Salud", valor: "afp_pro_salud" }, { nombre: "AFP + Vida", valor: "afp_+_vida" }]
-const previsionItems = [{ nombre: "Fonasa", valor: "fonasa" }, { nombre: "ISAPRE", valor: "isapre" },]
-const ciudadItems = [{ nombre: "Calama", valor: "calama" }, { nombre: "Antofagasta", valor: "antofagasta" }, { nombre: "Santiago", valor: "santiago" }, { nombre: "La Serena", valor: "La Serena" }]
-const profesionItems = [{ nombre: "Doctor", valor: "doctor" }, { nombre: "Dentista", valor: "dentista" }, { nombre: "Mecanico", valor: "mecanico" }, { nombre: "Abogado", valor: "abogado" },]
-const tipoCuentaArray = [{ nombre: "Cta. Corriente", valor: "cta-corriente" }, { nombre: "Cta. vista", valor: "cta-vista" }, { nombre: "Cta. Ahorro", valor: "cta-ahorro" }]
+FormularioAddDocsUsuarioFromFile.propTypes = {
+  // Puedes decsetOpenModallarar que un
+  setOpenModal: PropTypes.bool,
+  setOpenModalMensaje: PropTypes.bool,
+  refreshData: PropTypes.func,
+}
 const steps = [
   {
     titulo: "Subir Archivo",

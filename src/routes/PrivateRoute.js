@@ -1,7 +1,7 @@
+import PropTypes from 'prop-types';
 import { Navigate } from 'react-router-dom';
 import useAuth from '../hooks/useAuth';
 import CustomDrawer from '../layouts/Navbar';
-
 export default function PrivateRoute({ componente: Componente, permisos = [] }) {
   const { user } = useAuth();
   console.log(user)
@@ -15,4 +15,9 @@ export default function PrivateRoute({ componente: Componente, permisos = [] }) 
   } else {
     return <Navigate to="/login" />
   }
+}
+
+PrivateRoute.propTypes = {
+  componente: PropTypes.element,
+  permisos: PropTypes.array
 }

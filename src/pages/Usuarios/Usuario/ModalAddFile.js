@@ -5,8 +5,8 @@ import CustomButton from "../../../components/CustomButton/CustomButton";
 import CustomDatePicker from "../../../components/CustomInputs/CustomDatePicker";
 import { upDateUploadFileApi } from "../../../services/personal/personal";
 
+import PropTypes from 'prop-types';
 import CustomModal from "../../../components/CustomModal/CustomModal";
-
 
 export default function ModalAddFile({ reload, idUser, openModal, item, setOpenModal, refreshData, onFileChange }) {
 
@@ -83,4 +83,16 @@ export default function ModalAddFile({ reload, idUser, openModal, item, setOpenM
             </CustomModal>
         </div>
     );
+}
+
+
+ModalAddFile.propTypes = {
+    // Puedes decsetOpenModallarar que un
+    reload: PropTypes.func,
+    idUser: PropTypes.string,
+    openModal: PropTypes.bool,
+    item: PropTypes.object,
+    setOpenModal: PropTypes.func,
+    refreshData: PropTypes.func,
+    onFileChange: PropTypes.func,
 }

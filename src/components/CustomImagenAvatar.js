@@ -1,6 +1,7 @@
 import { Typography } from '@mui/material';
 import Avatar from '@mui/material/Avatar';
 import Stack from '@mui/material/Stack';
+import PropTypes from "prop-types";
 
 export default function CustomImagenAvatar({ width = 150, src = null, letras = "", fontSize = 60 }) {
   return (
@@ -16,4 +17,11 @@ export default function CustomImagenAvatar({ width = 150, src = null, letras = "
         />}
     </Stack>
   );
+}
+
+CustomImagenAvatar.propTypes = {
+  fontSize: PropTypes.number,
+  letras: PropTypes.string,
+  src: PropTypes.any,
+  width: PropTypes.number
 }

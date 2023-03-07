@@ -84,3 +84,20 @@ export async function crearFaena(data, empresa) {
     return false;
   }
 }
+
+export async function eliminarFaena(faenaId, empresa) {
+  // const db = getDatabase();
+
+  try {
+      await update(ref(database, `empresas/${empresa}/faenas/${faenaId}`), {
+          isEliminado: true
+      });
+      console.log("Faena eliminada correctamente");
+
+      return true;
+
+  } catch (err) {
+      console.log(err);
+      return false;
+  }
+}

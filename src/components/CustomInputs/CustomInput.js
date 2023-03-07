@@ -1,4 +1,5 @@
 import { Grid } from '@mui/material';
+import PropTypes from "prop-types";
 import * as Icons from 'react-feather';
 import './CustomInputs.scss';
 
@@ -28,4 +29,9 @@ export default function CustomInput({ inputSearchValue, setInputSearchValue, pla
       </Grid>
     </>
   );
+}
+CustomInput.propTypes = {
+  inputSearchValue: PropTypes.any,
+  placeholder: PropTypes.any,
+  setInputSearchValue: PropTypes.func
 }

@@ -34,7 +34,7 @@ export default function FaenasPage() {
       return [];
     }
     const filteredFaenas = Object.keys(faenas).map((key) => faenas[key]).filter((faena) => faena.isEliminado === false);
-    console.log(filteredFaenas)
+    // console.log(filteredFaenas)
     return filteredFaenas.map((faena) => ({
       id: faena.id,
       nombre: faena.nombre,
@@ -66,7 +66,6 @@ export default function FaenasPage() {
     fetchData();
   }, [empresa]);
   // console.log(utils)
-
 
 
 

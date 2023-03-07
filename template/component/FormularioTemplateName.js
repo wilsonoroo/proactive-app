@@ -1,4 +1,5 @@
 import { useFormik } from 'formik';
+import PropTypes from "prop-types";
 import { useEffect, useState } from 'react';
 import * as Icons from 'react-feather';
 import * as yup from 'yup';
@@ -13,8 +14,6 @@ export default function FormularioTemplateName({ setOpenModal, setOpenModalMensa
     const [currentPageForm, setCurrentPageForm] = useState(0);
     const [listaResponsables, setListaResponsables] = useState([])
     const [currentData, setCurrentData] = useState(data);
-    const [isErrorFormParte1, setIsErrorFormParte1] = useState(false);
-    const [isErrorFormParte2, setIsErrorFormParte2] = useState(false);
 
     const { data: responsables, firstLoading } = useFetch(() => obtenerResponsables());
 
@@ -159,6 +158,13 @@ export default function FormularioTemplateName({ setOpenModal, setOpenModalMensa
             </div>
         </div>
     );
+}
+
+FormularioTemplateName.propTypes = {
+    data: PropTypes.any,
+    refreshData: PropTypes.func,
+    setOpenModal: PropTypes.func,
+    setOpenModalMensaje: PropTypes.func
 }
 
 const nacionalidadItems = [{ nombre: "Chile", valor: "chile" }, { nombre: "Peru", valor: "peru" }, { nombre: "Colombia", valor: "colombia" }]

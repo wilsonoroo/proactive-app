@@ -9,9 +9,9 @@ import CustomSelectMultiple from '../../../components/CustomInputs/CustomSelectM
 import CustomTextField from '../../../components/CustomInputs/CustomTextField';
 import { guardarDatosEnFirebase } from '../../../services/database/usuariosServices';
 
-export const FormularioCrearUsuarioV = (props) => {
+export const FormularioCrearUsuarioV = ({ utils }) => {
 
-    const utils = props?.utils;
+
     // const rolesList = Object.keys(utils.usuarios.roles).map((key) => utils.usuarios.roles[key]);
     const rolesListName = Object.keys(utils.usuarios.roles).map((key) => {
         const rol = utils.usuarios.roles[key];
@@ -247,8 +247,6 @@ export const FormularioCrearUsuarioV = (props) => {
     )
 }
 
-
-
 FormularioCrearUsuarioV.propTypes = {
     utils: PropTypes.object
-};
+}

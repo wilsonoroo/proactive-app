@@ -1,4 +1,5 @@
 import { Button } from '@mui/material';
+import PropTypes from "prop-types";
 import './CustomButton.scss';
 
 export default function CustomButton({ children, icon: IconProp, isLoading = false, onClick, endIcon = false, type, typeColor = "primary", isEnabled = true, login = false }) {
@@ -36,4 +37,15 @@ export default function CustomButton({ children, icon: IconProp, isLoading = fal
       }
     </>
   );
+}
+CustomButton.propTypes = {
+  children: PropTypes.any,
+  endIcon: PropTypes.bool,
+  icon: PropTypes.any,
+  isEnabled: PropTypes.bool,
+  isLoading: PropTypes.bool,
+  login: PropTypes.bool,
+  onClick: PropTypes.any,
+  type: PropTypes.any,
+  typeColor: PropTypes.string
 }

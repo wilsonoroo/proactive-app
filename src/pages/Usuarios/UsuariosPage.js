@@ -19,7 +19,7 @@ export default function UsuariosPage() {
     console.log(usuarios, firstLoading)
     setListaUsuario(usuarios)
   }, [usuarios])
-  console.log("AAAAAAAA", listaUsuarios)
+  // console.log("AAAAAAAA", listaUsuarios)
 
   // getUsuariosArray(empresa).then((value) => console.log(value) );
 

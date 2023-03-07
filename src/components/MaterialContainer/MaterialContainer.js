@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import './MaterialContainer.scss';
 
 export default function MaterialContainer({ children, textoIzquierda, textoDerecha, isScrollable = false }) {
@@ -12,4 +13,10 @@ export default function MaterialContainer({ children, textoIzquierda, textoDerec
       </div>
     </div>
   );
+}
+MaterialContainer.propTypes = {
+  children: PropTypes.any,
+  isScrollable: PropTypes.bool,
+  textoDerecha: PropTypes.any,
+  textoIzquierda: PropTypes.any
 }

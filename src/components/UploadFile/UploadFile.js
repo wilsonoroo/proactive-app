@@ -1,4 +1,5 @@
 import { Grid, LinearProgress, Link } from '@mui/material';
+import PropTypes from "prop-types";
 import { useRef, useState } from 'react';
 import * as Icons from 'react-feather';
 import ModalAddFile from '../../pages/Usuarios/Usuario/ModalAddFile';
@@ -62,3 +63,20 @@ export default function UploadFile({ reload, idUser, item, index }) {
     </>
   );
 }
+
+UploadFile.propTypes = {
+  idUser: PropTypes.any,
+  index: PropTypes.any,
+  item: PropTypes.shape({
+    documentos: PropTypes.shape({
+      selfLink: PropTypes.any
+    }),
+    tipoDocumento: PropTypes.shape({
+      _id: PropTypes.any,
+      puedeVencer: PropTypes.any
+    })
+  }),
+  reload: PropTypes.func
+}
+
+

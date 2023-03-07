@@ -1,5 +1,6 @@
 import CircularProgress from '@mui/material/CircularProgress';
 import Typography from '@mui/material/Typography';
+import PropTypes from "prop-types";
 import './CustomProgresoCircular.scss';
 
 export default function CustomProgresoCircular({ valor = 100, size = 1 }) {
@@ -38,4 +39,8 @@ export default function CustomProgresoCircular({ valor = 100, size = 1 }) {
       </div>
     </div>
   );
+}
+CustomProgresoCircular.propTypes = {
+  size: PropTypes.number,
+  valor: PropTypes.number
 }

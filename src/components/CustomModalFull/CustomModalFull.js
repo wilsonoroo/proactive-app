@@ -1,5 +1,6 @@
 import { Dialog, DialogContent, DialogTitle, Grid } from '@mui/material';
 import Slide from '@mui/material/Slide';
+import PropTypes from "prop-types";
 import React, { useEffect, useState } from 'react';
 import * as Icons from 'react-feather';
 import './CustomModalFull.scss';
@@ -72,6 +73,15 @@ export default function CustomModalFull({ openModal, setOpenModal, titulo, child
     //   </Box>
     // </Modal>
   );
+}
+
+CustomModalFull.propTypes = {
+  children: PropTypes.any,
+  openModal: PropTypes.shape({
+    open: PropTypes.any
+  }),
+  setOpenModal: PropTypes.any,
+  titulo: PropTypes.any
 }
 
 const Transition = React.forwardRef(function Transition(props, ref) {

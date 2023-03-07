@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { useNavigate } from 'react-router-dom';
 import './CustomTabs.scss';
 
@@ -18,4 +19,11 @@ export default function CustomTabs({ items, setItemSelected, itemSelected }) {
       }
     </div>
   );
+}
+CustomTabs.propTypes = {
+  itemSelected: PropTypes.any,
+  items: PropTypes.shape({
+    map: PropTypes.func
+  }),
+  setItemSelected: PropTypes.func
 }

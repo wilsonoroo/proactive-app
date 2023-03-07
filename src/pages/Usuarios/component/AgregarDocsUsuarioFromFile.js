@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { useState } from "react";
 import * as Icons from 'react-feather';
 import CustomButton from "../../../components/CustomButton/CustomButton";
@@ -43,4 +44,7 @@ export default function AgregarDocsUsuarioFromFile({ refreshData }) {
       </CustomModalMensaje>
     </div>
   );
+}
+AgregarDocsUsuarioFromFile.propTypes = {
+  refreshData: PropTypes.any
 }

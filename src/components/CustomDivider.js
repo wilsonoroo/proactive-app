@@ -1,4 +1,5 @@
 
+import PropTypes from "prop-types";
 export default function CustomDivider({ horizontal = false, vertical = false }) {
 
   const styleHorizontal = {
@@ -13,4 +14,8 @@ export default function CustomDivider({ horizontal = false, vertical = false }) 
     //<Divider style={{ paddingTop: 30, paddingBottom: 30 }} variant="fullWidth" />
     <hr style={styleHorizontal} />
   );
+}
+CustomDivider.propTypes = {
+  horizontal: PropTypes.bool,
+  vertical: PropTypes.bool
 }

@@ -1,9 +1,10 @@
+import PropTypes from 'prop-types';
 import React, { useEffect, useState } from "react";
-import app from "../services/config/";
-import { auth } from "../services/config/";
-import { getUsuarioByUid, getUsuario } from "../services/database/usuariosServices";
-import { getUtils, getActive } from "../services/database/empresaServices";
 import Loading from "../components/Loading";
+import { auth } from "../services/config/";
+import { getActive, getUtils } from "../services/database/empresaServices";
+import { getUsuario, getUsuarioByUid } from "../services/database/usuariosServices";
+
 
 export const AuthContext = React.createContext();
 
@@ -20,7 +21,7 @@ export const AuthProvider = ({ children }) => {
     auth.onAuthStateChanged(async (user) => {
       const userSemiComplete = await getUsuarioByUid(user?.uid);
       const userComplete = await getUsuario(user?.uid, userSemiComplete?.empresaId);
-      setCurrentUser(userComplete);  
+      setCurrentUser(userComplete);
       setEmpresa(userSemiComplete?.empresaId);
       setUtils(await getUtils(userSemiComplete?.empresaId));
       const activeEmpresa = await getActive(userSemiComplete?.empresaId);
@@ -30,11 +31,11 @@ export const AuthProvider = ({ children }) => {
     });
   }, []);
 
-  if(pending){
+  if (pending) {
     return <Loading />
   }
   return (
-   
+
     <AuthContext.Provider
       value={{
         currentUser,
@@ -48,3 +49,7 @@ export const AuthProvider = ({ children }) => {
     </AuthContext.Provider>
   );
 };
+
+AuthProvider.propTypes = {
+  children: PropTypes.element,
+}

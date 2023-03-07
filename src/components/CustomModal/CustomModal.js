@@ -1,5 +1,6 @@
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
+import PropTypes from "prop-types";
 import * as Icons from 'react-feather';
 import CustomDivider from '../CustomDivider';
 import './CustomModal.scss';
@@ -29,4 +30,11 @@ export default function CustomModal({ openModal, setOpenModal, titulo, children 
       </Box>
     </Modal>
   );
+}
+
+CustomModal.propTypes = {
+  children: PropTypes.any,
+  openModal: PropTypes.any,
+  setOpenModal: PropTypes.func,
+  titulo: PropTypes.any
 }

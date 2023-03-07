@@ -1,4 +1,5 @@
 import GroupAddIcon from '@mui/icons-material/GroupAdd';
+import PropTypes from "prop-types";
 import { useState } from "react";
 import * as Icons from 'react-feather';
 import CustomButton from "../../../components/CustomButton/CustomButton";
@@ -44,4 +45,7 @@ export default function AgregarUsuarioFromFile({ refreshData }) {
       </CustomModalMensaje>
     </div>
   );
+}
+AgregarUsuarioFromFile.propTypes = {
+  refreshData: PropTypes.any
 }

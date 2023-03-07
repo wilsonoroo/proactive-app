@@ -20,14 +20,14 @@ export default function VehiculosPage() {
 
   // const [listaVehiculos, setListaVehiculos] = useState([]);
   const [openModal, setOpenModal] = useState(false);
-  const [edit, setEdit] = useState(false);
+
   const [openModalMensaje, setOpenModalMensaje] = useState({
     titulo: "",
     descripcion: "",
     isActive: false,
   });
 
-  const [dataSelect, setDataSelect] = useState(null);
+
 
   const [list, setList] = useState([]);
   // custom hook para realizar peticion
@@ -37,7 +37,7 @@ export default function VehiculosPage() {
       return [];
     }
     const filteredVehiculos = Object.keys(vehiculos).map((key) => vehiculos[key]).filter((vehiculo) => vehiculo.isEliminado === false);
-    console.log(filteredVehiculos)
+    // console.log(filteredVehiculos)
     return filteredVehiculos.map((vehiculo) => ({
       id: vehiculo.id,
       tipo: vehiculo.tipo,
@@ -60,9 +60,9 @@ export default function VehiculosPage() {
 
   const handlerEdit = (data) => {
     console.log(data);
-    setDataSelect(data)
+
     setOpenModal(true)
-    setEdit(true)
+
   }
 
 
@@ -86,8 +86,8 @@ export default function VehiculosPage() {
         <div className="h1">{tituloPage}</div>
         <CustomButton icon={Icons.PlusSquare} endIcon={true} typeColor="primary" onClick={() => {
           setOpenModal(true)
-          setDataSelect(null)
-          setEdit(false)
+
+
         }}>Nuevo Vehículo</CustomButton>
         <CustomModal
           titulo="Nuevo Vehículo"

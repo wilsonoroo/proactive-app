@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import CustomDivider from "../CustomDivider";
@@ -12,7 +13,7 @@ export default function TablaFaenas({ faenas, refreshData, onDelete, loadingData
     titulo: "",
     descripcion: "",
     isActive: false,
-  });  
+  });
   const [inputSearchValue, setInputSearchValue] = useState(null);
   const [dataFaenas, setDataFaenas] = useState({ data: [], loading: false });
 
@@ -57,12 +58,8 @@ export default function TablaFaenas({ faenas, refreshData, onDelete, loadingData
   }
 
 
-
-
-
-
-  const handleEliminar = (idUsuario) => {
-    onDelete(idUsuario)
+  const handleEliminar = (idFaena) => {
+    onDelete(idFaena)
 
   }
 
@@ -110,7 +107,7 @@ export default function TablaFaenas({ faenas, refreshData, onDelete, loadingData
     //   type: "bool"
     // },
     {
-      id: '_id',
+      id: 'id',
       disablePadding: false,
       label: 'Acciones',
       type: "acciones",
@@ -140,5 +137,12 @@ export default function TablaFaenas({ faenas, refreshData, onDelete, loadingData
       </div>
     </div>
   );
+}
+
+TablaFaenas.propTypes = {
+  faenas: PropTypes.any,
+  loadingData: PropTypes.any,
+  onDelete: PropTypes.func,
+  refreshData: PropTypes.any
 }
 

@@ -73,7 +73,7 @@ export default function TemplateName() {
                 firstLoading ?
                     <Loading />
                     :
-                    <TemplateNameTable usuarios={usuarios} refreshData={refreshData} onDelete={handleEliminar} />
+                    < >tablas</>
             }
         </MainContainer>
     );
